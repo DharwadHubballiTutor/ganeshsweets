@@ -174,7 +174,7 @@ var today=curr_year+ "-" + curr_month + "-" + curr_date;
         if (formData['itemquantity'] != "" && formData['itemquantity'] != "0") {
             $('#lineItemTable tbody').
             append($(document.createElement('tr')).prop({
-
+                    id:formData['itemid']
             }));
 
             $('#lineItemTable tr:last').
@@ -195,7 +195,7 @@ var today=curr_year+ "-" + curr_month + "-" + curr_date;
                 innerHTML: formData['totalAmount']
             }));
             $('#lineItemTable tr:last').
-            append($(document.createElement('td')).append('<a class="btn btn-success" href="#" role="button"><i class="far fa-trash-alt"></i></a> <a class="btn btn-danger" href="#" role="button">delete</a>'));
+            append($(document.createElement('td')).append('<a onclick="removeItem('+formData['itemid']+')")class="btn btn-success" href="#" role="button"><i class="far fa-trash-alt"></i></a> <a class="btn btn-danger" href="#" role="button">delete</a>'));
           
            
         $('#totalOrderAmount').val(parseFloat(formData['totalAmount'])+ parseFloat($('#totalOrderAmount').val()));
@@ -205,13 +205,18 @@ var today=curr_year+ "-" + curr_month + "-" + curr_date;
 
     });
 
+    function removeItem(itemId){
+        document.getElementById(itemId).remove();
+        
+    }
+
+
     $('#itemperpieceprice').on('change',function(e){
         $('#totalAmount').val(this.value*$('#itemquantity').val());
     })
     $('#saleOrder_form').submit(function(event) {
         debugger;
         sales[0].totalAmount = $('#totalAmount').val();
-        console.log(sales[0]);
         $.ajax({
             type: "POST",
             url: config.developmentPath + "/Admin/Controller/salesordercontroller.php",

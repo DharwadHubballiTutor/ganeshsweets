@@ -33,10 +33,18 @@ require_once("../Model/salesorderModel.php");
                         <th>Sales Order Code</th>
                         <th>Sales Date</th>
                         <th style='display:none'>Customer Id</th>
-                        <th>Customer Name</th>                   
+                        <th>Customer Name</th>
+                        <th style='display:none'>City</th>
+                        
+                        
+                        
+                       
+                        
+                       
                         <th>Contact</th>
                         <th>Email</th>
                         <th>Total Amount</th>
+                        
                         <th style='display:none'>Customer Address</th>
                         <th style='display:none'>FileName</th>
                         <th>Action</th>
@@ -52,6 +60,9 @@ require_once("../Model/salesorderModel.php");
                         <td>" . $SalesObj->get_salesdate() . "</td>
                         <td style='display:none'>" . $SalesObj->get_customer() . "</td>
                         <td>" . $SalesObj->getCustomerName() . "</td>
+                        <td style='display:none'>" . $SalesObj->getCity() . "</td>
+                        
+                        
                         <td>" . $SalesObj->getCustomerContactNumber() . "</td>
                         <td>" . $SalesObj->getCustomerEmail() . "</td>
                         <td>" . $SalesObj->get_totalAmount() . "</td>
@@ -185,21 +196,52 @@ require_once("../Model/salesorderModel.php");
             </div>
             <div class="modal-body">
                 <span id="form_message"></span>
+                
+
                 <div class="form-group">
                     <div class="row">
-                        <label class="col-md-4 text-right">Customer Name <span class="text-danger">*</span></label>
+                        <label class="col-md-4 text-right">Sales order Code <span class="text-danger">*</span></label>
                         <div class="col-md-8">
-                            <input type="text" name="editedCustomerName" id="editedCustomerName" class="form-control"
+                            <input type="text" name="editedSaleOrderCode" id="editedSaleOrderCode" class="form-control"
                                 readonly />
-                            <input type="hidden" name="id" id="id" value="">
-                            <input type="hidden" name="SOcode" id="POcode" value="">
-                            <input type="hidden" name="Purchaseddate" id="Purchaseddate" value="">
-                            <input type="hidden" name="customer" id="customer" value="">
-                            <input type="hidden" name="itemid" id="itemid" value="">
-                            <input type="hidden" name="unitId" id="unitId" value="">
+                            
                         </div>
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="row">
+                        <label class="col-md-4 text-right">Customer Name <span class="text-danger">*</span></label>
+                        <div class="col-md-8"> 
+                            <input type="text" name="editedCustomerName" id="editedCustomerName" class="form-control"
+                                readonly />
+                        
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="row">
+                        <label class="col-md-4 text-right">Sales order date <span class="text-danger">*</span></label>
+                        <div class="col-md-8">
+                            <input type="text" name="editedSalesOrderDate" id="editedSalesOrderDate" class="form-control"
+                                readonly />
+                           
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <label class="col-md-4 text-right">City <span class="text-danger">*</span></label>
+                        <div class="col-md-8">
+                            <input type="text" name="editedCity" id="editedCity" class="form-control"
+                                readonly />
+                           
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <div class="row">
                         <label class="col-md-4 text-right">Total Amount<span class="text-danger">*</span></label>
@@ -276,7 +318,7 @@ require_once("../Model/salesorderModel.php");
                                 id="SOlineItemTable" width="100%" cellspacing="0">
                                 <thead>
                                     <tr>
-                                       
+
                                         <th>Name</th>
                                         <th>Quantity</th>
                                         <th>Unit</th>
@@ -485,17 +527,24 @@ $(document).ready(function() {
         $('#SOcode').val(this.cells[1].innerHTML);
         $('#Salesdate').val(this.cells[2].innerHTML);
         $('#customer').val(this.cells[3].innerHTML);
+        $('#edited').val(this.cells[1].innerHTML);
+        $('#editedSalesOrderDate').val(this.cells[2].innerHTML);
+        $('#editedSaleOrderCode').val(this.cells[1].innerHTML);
+
+        $('#editedCity').val(this.cells[5].innerHTML);
+        
+        
         $('#editedCustomerName').val(this.cells[4].innerHTML);
         $('#displayCustomerName').text(this.cells[4].innerHTML);
-        $('#editeditemcat').val(this.cells[5].innerHTML);
-        $('#displayPhone').text(this.cells[5].innerHTML);
+        $('#editeditemcat').val(this.cells[6].innerHTML);
+        $('#displayPhone').text(this.cells[6].innerHTML);
         $('#editeditemsubcat').val(this.cells[6].innerHTML);
-        $('#displayemail').text(this.cells[6].innerHTML);
+        $('#displayemail').text(this.cells[7].innerHTML);
         $('#displayitemname').text(this.cells[8].innerHTML);
         $('#editeditemname').val(this.cells[8].innerHTML);
-        $('#editedTotalAmount').val(this.cells[7].innerHTML);
-        $('#displayTotalAmount').text(this.cells[7].innerHTML);
-        $('#displayAddress').text(this.cells[8].innerHTML)
+        $('#editedTotalAmount').val(this.cells[8].innerHTML);
+        $('#displayTotalAmount').text(this.cells[8].innerHTML);
+        $('#displayAddress').text(this.cells[9].innerHTML)
         // if (this.cells[11].innerHTML != "") {
         //     $('#downloadSOLineItem').attr('href', '../pdfs/itemList/' + this.cells[11].innerHTML);
         // } else {
@@ -541,7 +590,7 @@ $(document).ready(function() {
                 append($(document.createElement('td')).prop({
                     innerHTML: value.quantity
                 }));
-                
+
 
                 $('#SOlineItemTable tr:last').
                 append($(document.createElement('td')).prop({

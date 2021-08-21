@@ -38,6 +38,7 @@ class DBsales
      CU.customerContactNumber AS customerPhone,
      CU.customerEmail AS customerEmail,
      CU.customerAddress AS Address,
+     CU.customerCity AS city,
      SO.salesPDFName AS PDFName,
      SUM(SLI.TotalAmt) AS TotalAmt 
      FROM `sales_order` AS SO 
@@ -66,6 +67,7 @@ class DBsales
         $sales->setCustomerContactNumber($row["customerPhone"]);
         $sales->setCustomerEmail($row["customerEmail"]);
         $sales->setCustomerAddress($row["Address"]);
+        $sales->setCity($row["city"]);
         $sales->set_salesPDFName($row["PDFName"]);
         array_push($salesList, $sales);
       }
