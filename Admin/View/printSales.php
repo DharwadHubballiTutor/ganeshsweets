@@ -2,8 +2,7 @@
 require_once "salesorderheader.php";
 include('../DB Operations/salesorderOps.php');
 $salesId = $_GET['id'];
-$saleslist = DBsales::getSalesForPrint($salesId);
-$firstsales = $saleslist[0];
+$firstsales = DBsales::getSalesForPrint($salesId);
 ?>
 <link rel="stylesheet" href="../css/inword.css" />
 <style>
@@ -43,6 +42,7 @@ $firstsales = $saleslist[0];
                 <tr>
                     <td style="text-align:center" colspan="6">
                         <h1>Sales Order</h1>
+                        <p>Ganesh Sweets Dharwad</p>
                     </td>
                 </tr>
                 <tr>
@@ -231,7 +231,6 @@ require_once "footer.php";
         $('#itemListForm').submit(function(e) {
             var content = $('#printsales').html();
             var fileName = $('#salescode').text() + $('#listquoteCode').text() + '_SO';
-            console.log(fileName);
             var uniturl = config.developmentPath + "/Admin/Controller/pdfGeneratorContorller.php";
             $.ajax({
                 type: "POST",
@@ -241,7 +240,7 @@ require_once "footer.php";
                     "salesId": $('#salesId').val(),
                     "fileType": "salesorder",
                     "waterMarked": waterMarked,
-                    "fileName": fileName,
+                    "fileName": fileName.trim(),
                     "html": content
                 },
                 dataType: "json",
@@ -249,7 +248,8 @@ require_once "footer.php";
             }).done(function(data) {
                 console.log(data);
             });
-            window.open(config.developmentPath +'/Admin/pdfs/salesorder/'+fileName+'.pdf');
+            
+            window.open(config.developmentPath +'/Admin/pdfs/salesorder/'+fileName.trim()+'.pdf');
         });
         // $('#PIForm').submit(function(e) {
         //     var content = $('#printPI').html();

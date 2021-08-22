@@ -20,9 +20,9 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
         $SaleslineItem->set_quantity(Sanitization::test_input($_POST["quantity"]));
         $SaleslineItem->set_price(Sanitization::test_input($_POST["price"]));
         $SaleslineItem->set_totalamt(Sanitization::test_input($_POST["totalamt"]));
-        $SaleslineItem->set_pendingamt(Sanitization::test_input($_POST["pendingamt"]));
+        $SaleslineItem->set_unit(Sanitization::test_input($_POST["unit"]));
         DBSOLineItem::insert($SaleslineItem);
-        // header("location: ../View/SOlineItemView.php?id=".$_POST["SOID"]);
+        header("location: ../View/SOlineItemView.php?id=".$_POST["SOID"]);
     }
 }
 //else if($_SERVER["REQUEST_METHOD"]=="GET"){

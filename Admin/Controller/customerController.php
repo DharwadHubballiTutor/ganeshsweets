@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
               $id.=$char;
       }
     }
-    $customerCode='GS-'.substr((str_replace('-','',$customer->get_customerDov())),0,6).'-'.$acronym.$id;
+    $customerCode='GS-'.substr((str_replace('-','',$customer->get_customerDov())),0,6).'-'.$acronym.$id.'-CU';
     $customer->setCustomerCode($customerCode);
     error_log($customerCode);
     DBcustomer::update($customer);

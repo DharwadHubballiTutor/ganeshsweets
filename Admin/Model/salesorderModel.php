@@ -17,6 +17,7 @@ class SalesOrder implements JsonSerializable
     private $customerEmail;
     private $customerAddress;
     private $city;
+    private $customerCode;
 
     public function set_id($id)
     {
@@ -311,6 +312,24 @@ class SalesOrder implements JsonSerializable
     public function setCity($city)
     {
         $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of customerCode
+     */
+    public function getCustomerCode()
+    {
+        return $this->customerCode;
+    }
+
+    /**
+     * Set the value of customerCode
+     */
+    public function setCustomerCode($customerCode): self
+    {
+        $this->customerCode = $customerCode;
 
         return $this;
     }

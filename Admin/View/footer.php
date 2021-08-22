@@ -66,7 +66,7 @@
     <script type="text/javascript" src="../vendor/jqueryserializeJSON/jquery.serializejson.min.js"></script>
     <script>
     var config = {
-        "developmentPath":window.location.origin+"/GaneshSweets",
+        "developmentPath":window.location.origin+"/ganeshsweets",
         "productionPath":window.location.origin
 };
     </script>

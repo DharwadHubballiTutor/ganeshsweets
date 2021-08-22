@@ -35,16 +35,9 @@ require_once("../Model/salesorderModel.php");
                         <th style='display:none'>Customer Id</th>
                         <th>Customer Name</th>
                         <th style='display:none'>City</th>
-                        
-                        
-                        
-                       
-                        
-                       
                         <th>Contact</th>
                         <th>Email</th>
                         <th>Total Amount</th>
-                        
                         <th style='display:none'>Customer Address</th>
                         <th style='display:none'>FileName</th>
                         <th>Action</th>
@@ -61,8 +54,6 @@ require_once("../Model/salesorderModel.php");
                         <td style='display:none'>" . $SalesObj->get_customer() . "</td>
                         <td>" . $SalesObj->getCustomerName() . "</td>
                         <td style='display:none'>" . $SalesObj->getCity() . "</td>
-                        
-                        
                         <td>" . $SalesObj->getCustomerContactNumber() . "</td>
                         <td>" . $SalesObj->getCustomerEmail() . "</td>
                         <td>" . $SalesObj->get_totalAmount() . "</td>
@@ -84,7 +75,6 @@ require_once("../Model/salesorderModel.php");
                        <i class='fas fa-print'></i> 
                            Print Sale Order
                       </a>
-
                         <button class='btn btn-primary dropdown-item'
                         data-toggle='modal' 
                         data-target='#editSalesModal' 
@@ -93,7 +83,6 @@ require_once("../Model/salesorderModel.php");
                         <i class='fas fa-user-edit'></i> 
                             Edit Sales Order
                          </button>
-
                         <button class='btn btn-primary dropdown-item'
                         data-toggle='modal' 
                         data-target='#viewModal' 
@@ -102,7 +91,6 @@ require_once("../Model/salesorderModel.php");
                         <i class='fas fa-info'></i> 
                             Sales Order Info
                         </button>
-
                         <button class='btn btn-primary dropdown-item'
                         data-toggle='modal' data-target='#deleteSalesModal' 
                         name='delete_button' 

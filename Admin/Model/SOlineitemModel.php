@@ -167,4 +167,22 @@ class SaleslineItem implements JsonSerializable
     }
 
 
+
+    /**
+     * Get the value of PendingAmt
+     */
+    public function getPendingAmt()
+    {
+        return $this->PendingAmt;
+    }
+
+    /**
+     * Set the value of PendingAmt
+     */
+    public function setPendingAmt($PendingAmt): self
+    {
+        $this->PendingAmt = $PendingAmt;
+
+        return $this;
+    }
 }

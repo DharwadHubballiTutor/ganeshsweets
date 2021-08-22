@@ -28,7 +28,7 @@ require "../Model/paymentmodel.php";
           foreach ($words as $w) {
               $acronym .= $w[0];
           }
-          $salesCode='GS-'.substr((str_replace('-', '', $sales->get_salesdate())), 0, 6).'-'.$acronym;
+          $salesCode='GS-'.substr((str_replace('-', '', $sales->get_salesdate())), 0, 6).'-'.$acronym.'-SO';
           $sales->setSOcode($salesCode);
           $salesId=DBsales::insert($sales);
           error_log( $salesId);
@@ -67,7 +67,7 @@ require "../Model/paymentmodel.php";
       } elseif ($_POST["action"]=='delete') {
           DBsales::delete($_POST["id"]);
       }
-      header("location:../Admin/View/SOview.php");
+    header("location:../Admin/View/SOview.php");  
   }
   if ($_SERVER["REQUEST_METHOD"]=="GET") {
         }

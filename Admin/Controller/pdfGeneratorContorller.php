@@ -21,7 +21,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
     $mpdf->WriteHTML($_POST['html'], \Mpdf\HTMLParserMode::HTML_BODY);
     $mpdf->Output('../pdfs/' . $fileType . '/' . $fileName . '.pdf', \Mpdf\Output\Destination::FILE);
-    error_log($fileType);
    
     if($fileType=='itemList'){
         $Quotation= new Quotation();
@@ -44,10 +43,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $Sales->set_salesPDFName($fileName.'.pdf');
         DBsales::updateFileName($Sales);
     }
-    // header('Content-type: application/pdf');
-    // header('Content-Disposition: inline; filename="' . $filename . '"');
-    // header('Content-Transfer-Encoding: binary');
-    // header('Content-Length: ' . filesize($filename));
-    // header('Accept-Ranges: bytes');
-    // readfile($filename);
+   
 }

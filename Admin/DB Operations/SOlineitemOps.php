@@ -16,7 +16,6 @@ class DBSOLineItem
             `Quantity`, 
             `unit_id`, 
             `TotalAmt`,
-            
             `GST`, 
             `Price`) 
                 values ('".$lineItemObj->get_SOID().
@@ -24,7 +23,6 @@ class DBSOLineItem
                 "','".$lineItemObj->get_quantity().
                 "','".$lineItemObj->get_unit().
                 "','".$lineItemObj->get_totalamt().
-         
                 "','".$lineItemObj->get_GST().
                 "','".$lineItemObj->get_price().
                 "')";
@@ -99,7 +97,6 @@ class DBSOLineItem
         SLI.GST AS GST,
         C.item_catName AS CategoryName,
         SC.item_subcatName AS SubCategoryName
-        
         FROM `salesorder_lineitem` AS SLI 
         JOIN `item_details` AS I ON SLI.Item_id=I.item_id 
         Join `item_category` C ON C.item_catid=I.item_catid
@@ -118,13 +115,11 @@ class DBSOLineItem
             $item->setName($row["Name"]);
             $item->set_quantity($row["Quantity"]);
             $item->setunitName($row["UnitName"]);
-        
             $item->set_totalamt($row['TotalAmount']);
-           
-          
             $item->set_GST($row['GST']);
             $item->setItemcatname($row["CategoryName"]);
             $item->setItemsubcatname($row["SubCategoryName"]);
+            $item->set_price($row["Price"]);
             array_push($SOListItem,$item);
           }
         }

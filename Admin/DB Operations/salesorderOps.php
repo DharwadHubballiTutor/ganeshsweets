@@ -87,7 +87,8 @@ class DBsales
     CU.customerId AS customerId, 
     CU.customerName AS CustomerName, 
     CU.customerAddress AS customerAddress, 
-    CU.customerContactNumber As customerContactNumber, 
+    CU.customerContactNumber As customerContactNumber,
+    CU.	customerCode AS customerCode,
     I.item_name AS Name, 
     SO.SOID AS salesid, 
     SO.Quantity AS Quantity, 
@@ -102,7 +103,7 @@ class DBsales
     $result = $connectionObj->query($sql);
     $count = mysqli_num_rows($result);
     error_log($sql);
-    $salesList = [];
+   
     if ($count > 0) {
       while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
         $sales = new salesOrder();
@@ -110,19 +111,18 @@ class DBsales
         $sales->setSOcode($row["SOcode"]);
         $sales->setName($row["Name"]);
         $sales->setCustomerName($row["CustomerName"]);
-
         $sales->setCustomerContactNumber($row["customerContactNumber"]);
         $sales->setCustomerAddress($row["customerAddress"]);
-
         $sales->setQuantity($row["Quantity"]);
         $sales->set_unit($row["Unit"]);
         $sales->set_itemId($row["ItemId"]);
         $sales->set_salesdate(date('Y-m-d',strtotime($row["SalesDate"])));
         $sales->set_totalAmount($row["TotalAmt"]);
-        array_push($salesList, $sales);
+        $sales->setCustomerCode($row["customerCode"]);
+    
       }
     }
-    return $salesList;
+    return $sales;
   }
 
 
