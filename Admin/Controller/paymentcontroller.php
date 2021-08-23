@@ -27,33 +27,8 @@ require_once "../DB Operations/paymentOps.php";
     }else{
       $admit->set_duedate(NULL); 
     }
-    
-    // $filename="". $admit->get_custname().date("Y-m-d").".pdf";
-    // $admit->set_paymentreceipt($filename);
     DBpayment::insert($admit);
-    // $receipt=DBpayment::paymentcollection( $admit->get_custid());
-    // Helper::paymentreceipt($receipt);
-    
-
   }
 
-  // function Pendingfees($tfees,$pfees){
-  //   $pendingfees=$pendingfees-$pfees;
-  //   return $pendingfees;
-  //  }
+  
 ?>
-<html>
-
-    <head>
-        <title> New Admission </title>
-    </head>
-
-    <body>
-        <?php 
-        // header("location:../View/fees.php");
-?>
-
-
-    </body>
-
-</html>

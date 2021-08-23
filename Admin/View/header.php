@@ -74,7 +74,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="paymentcollection.php">
+                    <a class="nav-link" href="paymentView.php">
                         <i class="far fa-edit"></i>
                         <span>Payments</span></a>
                 </li>

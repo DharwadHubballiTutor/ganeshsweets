@@ -129,7 +129,60 @@ class DBsales
     }
     return $sales;
   }
-
+  public static function GetSaleOrderBasedOnCode($code)
+  {
+    $db = ConnectDb::getInstance();
+    $connectionObj = $db->getConnection();
+    $sql = "SELECT S.Id AS Id,
+    S.Item_id AS ItemId,
+    S.SOcode AS SOcode,
+    S.SalesDate AS SalesDate,
+    CU.customerId AS customerId, 
+    CU.customerName AS CustomerName, 
+    CU.customerAddress AS customerAddress, 
+    CU.customerContactNumber As customerContactNumber,
+    CU.	customerCode AS customerCode,
+    SO.SOID AS salesid,
+    SUM(SO.TotalAmt) AS TotalAmt
+    FROM `sales_order` 
+    AS S 
+    JOIN `customer` CU ON CU.customerId=S.CustomerId 
+    JOIN `salesorder_lineitem` SO ON SO.SOID =S.Id 
+    JOIN `item_details` I ON I.item_id =SO.Item_id 
+    JOIN `units` U ON SO.unit_id=U.unitId
+    WHERE S.SOcode='" . $code . 
+    "' GROUP BY  Id,
+    ItemId,
+    SOcode,
+    SalesDate,
+    customerId, 
+    CustomerName, 
+    customerAddress, 
+     customerContactNumber,
+     customerCode,
+     salesid";
+    
+    $result = $connectionObj->query($sql);
+    $count = mysqli_num_rows($result);
+    error_log($sql);
+    $sales = new salesOrder();
+    if ($count > 0) {
+      while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+     
+        $sales->set_Id($row["Id"]);
+        $sales->setSOcode($row["SOcode"]);
+        $sales->setCustomerName($row["CustomerName"]);
+        $sales->setCustomerContactNumber($row["customerContactNumber"]);
+        $sales->setCustomerAddress($row["customerAddress"]);
+        $sales->set_itemId($row["ItemId"]);
+        $sales->set_salesdate(date('Y-m-d',strtotime($row["SalesDate"])));
+        $sales->set_totalAmount($row["TotalAmt"]);
+        $sales->setCustomerCode($row["customerCode"]);
+    
+      }
+    }
+    return $sales;
+  }
 
 
   public static function selectCustomer($id)
