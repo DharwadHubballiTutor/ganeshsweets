@@ -1,6 +1,7 @@
 <?php
 require_once "salesorderheader.php";
 include('../DB Operations/salesorderOps.php');
+include('../DB Operations/SOlineItemOps.php');
 $salesId = $_GET['id'];
 $firstsales = DBsales::getSalesForPrint($salesId);
 ?>
@@ -47,9 +48,12 @@ $firstsales = DBsales::getSalesForPrint($salesId);
                 </tr>
                 <tr>
                     <!-- <th >Customer Name </th> -->
-                    <td rowspan="3" colspan="5"> To: <?php echo $firstsales->getCustomerName() ?> <br>
-                        <?php echo $firstsales->getCustomerAddress() ?> <br />
-                        <?php echo $firstsales->getCustomerContactNumber() ?>
+                    <td rowspan="3" colspan="5"> 
+                        <h5>Customer Details</h5>
+                        Customer Code : <?php echo $firstsales->getCustomerCode() ?> <br>
+                        To : <?php echo $firstsales->getCustomerName() ?> <br>
+                        Address : <?php echo $firstsales->getCustomerAddress() ?> <br />
+                        Phone : <?php echo $firstsales->getCustomerContactNumber() ?>
                     </td>
                 </tr>
                 <tr>
@@ -72,36 +76,32 @@ $firstsales = DBsales::getSalesForPrint($salesId);
                 $count = 1;
                 $sum = 0;
                 $sumquantity = 0;
+                $saleslist = DBSOLineItem::getLineItemBySalesIdForOrder($salesId);
                 foreach ($saleslist as $sales) {
                     echo '<tr  id="' . $count . '">
             <td  style="text-align:center">' . $count . '<button type="button" onclick="callMe(' . $count . ')" class="btn btn-secondary btn-sm">Remove</button></td>
             <td colspan="3">' . $sales->getName() . '</td>
-            <td  style="text-align:center">' . $sales->getQuantity() . " " . $sales->get_unit() . '</td>
+            <td  style="text-align:center">' . $sales->get_quantity() . " " . $sales->getunitName() . '</td>
            
-            <td  style="text-align:center"id="sales-' . $count . '">' . $sales->get_totalAmount() . '</td>
+            <td  style="text-align:center"id="sales-' . $count . '">' . $sales->get_totalamt() . '</td>
         </tr>';
-                    $sum = $sum + floatval($sales->get_totalAmount());
-                    $sumquantity = $sumquantity + floatval($sales->getQuantity());
-                    $payable = $sum + floatval($sales->get_pendingAmount());
+                    $sum = $sum + floatval($sales->get_totalamt());
+                    $sumquantity = $sumquantity + floatval($sales->get_quantity());
+                   
                     $count++;
                 }
                 echo "<input type='hidden' id='totalRow' value='" . --$count . "'/>";
                 ?>
                 <tr>
-                    <td style="text-align:right" rowspan="2" colspan="3">
+                    <td style="text-align:right" rowspan="" colspan="3">
                         Returns
                     </td>
                     <td style="text-align:right">Total</td>
-                    <td style="text-align:center"><?php echo $sumquantity ?> </td>
+                    <td style="text-align:center"></td>
                     <td id="totalAmount" style="text-align:center">
                         <?php echo $sum ?>
                     </td>
 
-                </tr>
-
-                <tr>
-                    <td style="text-align:right">Payable</td>
-                    <td colspan="2" style="text-align:center"><?php echo $payable ?> </td>
                 </tr>
 
                 <tr>

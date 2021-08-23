@@ -81,7 +81,6 @@ class DBsales
     $connectionObj = $db->getConnection();
     $sql = "SELECT S.Id AS Id,
     S.Item_id AS ItemId,
-    SO.TotalAmt AS TotalAmt,
     S.SOcode AS SOcode,
     S.SalesDate AS SalesDate,
     CU.customerId AS customerId, 
@@ -89,17 +88,26 @@ class DBsales
     CU.customerAddress AS customerAddress, 
     CU.customerContactNumber As customerContactNumber,
     CU.	customerCode AS customerCode,
-    I.item_name AS Name, 
-    SO.SOID AS salesid, 
-    SO.Quantity AS Quantity, 
-    U.unitName AS Unit
+    SO.SOID AS salesid,
+    SUM(SO.TotalAmt) AS TotalAmt
     FROM `sales_order` 
     AS S 
     JOIN `customer` CU ON CU.customerId=S.CustomerId 
     JOIN `salesorder_lineitem` SO ON SO.SOID =S.Id 
     JOIN `item_details` I ON I.item_id =SO.Item_id 
     JOIN `units` U ON SO.unit_id=U.unitId
-    WHERE S.Id=" . $id;
+    WHERE S.Id=" . $id . 
+    " GROUP BY  Id,
+    ItemId,
+    SOcode,
+    SalesDate,
+    customerId, 
+    CustomerName, 
+    customerAddress, 
+     customerContactNumber,
+     customerCode,
+     salesid";
+    
     $result = $connectionObj->query($sql);
     $count = mysqli_num_rows($result);
     error_log($sql);
@@ -109,12 +117,9 @@ class DBsales
         $sales = new salesOrder();
         $sales->set_Id($row["Id"]);
         $sales->setSOcode($row["SOcode"]);
-        $sales->setName($row["Name"]);
         $sales->setCustomerName($row["CustomerName"]);
         $sales->setCustomerContactNumber($row["customerContactNumber"]);
         $sales->setCustomerAddress($row["customerAddress"]);
-        $sales->setQuantity($row["Quantity"]);
-        $sales->set_unit($row["Unit"]);
         $sales->set_itemId($row["ItemId"]);
         $sales->set_salesdate(date('Y-m-d',strtotime($row["SalesDate"])));
         $sales->set_totalAmount($row["TotalAmt"]);
