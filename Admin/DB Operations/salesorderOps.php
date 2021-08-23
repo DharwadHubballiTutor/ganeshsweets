@@ -134,7 +134,6 @@ class DBsales
     $db = ConnectDb::getInstance();
     $connectionObj = $db->getConnection();
     $sql = "SELECT S.Id AS Id,
-    S.Item_id AS ItemId,
     S.SOcode AS SOcode,
     S.SalesDate AS SalesDate,
     CU.customerId AS customerId, 
@@ -152,7 +151,6 @@ class DBsales
     JOIN `units` U ON SO.unit_id=U.unitId
     WHERE S.SOcode='" . $code . 
     "' GROUP BY  Id,
-    ItemId,
     SOcode,
     SalesDate,
     customerId, 
@@ -174,7 +172,7 @@ class DBsales
         $sales->setCustomerName($row["CustomerName"]);
         $sales->setCustomerContactNumber($row["customerContactNumber"]);
         $sales->setCustomerAddress($row["customerAddress"]);
-        $sales->set_itemId($row["ItemId"]);
+     
         $sales->set_salesdate(date('Y-m-d',strtotime($row["SalesDate"])));
         $sales->set_totalAmount($row["TotalAmt"]);
         $sales->setCustomerCode($row["customerCode"]);

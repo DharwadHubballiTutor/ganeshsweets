@@ -76,7 +76,7 @@ require_once "../../Admin/Model/customerModel.php";
           if (mysqli_num_rows($result) > 0) {
           while($row = mysqli_fetch_assoc($result)) {
           $view= new Payment();
-          $view->set_modifiedon($row['modifiedon']);
+          //$view->set_modifiedon($row['modifiedon']);
           $view->set_paidamt($row['paid_amount']);
           $view->set_pendingamt($row['pending_amount']);
           $view->set_paymentmode($row['payment_mode']);

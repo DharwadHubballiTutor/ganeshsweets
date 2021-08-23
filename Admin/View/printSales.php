@@ -48,7 +48,7 @@ $firstsales = DBsales::getSalesForPrint($salesId);
                 </tr>
                 <tr>
                     <!-- <th >Customer Name </th> -->
-                    <td rowspan="3" colspan="5"> 
+                    <td rowspan="3" colspan="5">
                         <h5>Customer Details</h5>
                         Customer Code : <?php echo $firstsales->getCustomerCode() ?> <br>
                         To : <?php echo $firstsales->getCustomerName() ?> <br>
@@ -87,7 +87,7 @@ $firstsales = DBsales::getSalesForPrint($salesId);
         </tr>';
                     $sum = $sum + floatval($sales->get_totalamt());
                     $sumquantity = $sumquantity + floatval($sales->get_quantity());
-                   
+
                     $count++;
                 }
                 echo "<input type='hidden' id='totalRow' value='" . --$count . "'/>";
@@ -248,8 +248,8 @@ require_once "footer.php";
             }).done(function(data) {
                 console.log(data);
             });
-            
-            window.open(config.developmentPath +'/Admin/pdfs/salesorder/'+fileName.trim()+'.pdf');
+
+            window.open(config.developmentPath + '/Admin/pdfs/salesorder/' + fileName.trim() + '.pdf');
         });
         // $('#PIForm').submit(function(e) {
         //     var content = $('#printPI').html();

@@ -4,13 +4,19 @@ require_once("../DB Operations/customerOps.php");
 require_once("../DB Operations/paymentOps.php");
 require_once("../Model/customerModel.php");
 require_once  "../DB Operations/salesorderOps.php";
+
+
 if ($_SERVER["REQUEST_METHOD"]=="GET") {
+    $saleOrder=null;
     if (isset($_GET["salesOrderNumber"])){    
     $salesOrderNumber=$_GET["salesOrderNumber"];
-    echo $salesOrderNumber;
+  
     $saleOrder=DBsales::GetSaleOrderBasedOnCode($salesOrderNumber);
+   
     }
+    
 }
+
 ?>
 <h1 class="h3 mb-4 text-gray-800">Payment Management</h1>
 <!-- DataTales Example -->
@@ -28,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"]=="GET") {
             </div>
         </div>
     </div>
-
+    
     <div class="card-body">
     <div class="row">
         <div class="col">
@@ -39,15 +45,84 @@ if ($_SERVER["REQUEST_METHOD"]=="GET") {
                 placeholder="Sales Order Number" 
                 aria-label="Search"
                 required
-                pattern="[GS]{2}-[0-9]{6}-[A-Za-z]{2}[0-9]+-[SO]{2}"
+                pattern="[GS]{2}-[0-9]{6}-[A-Za-z]{2}[0-9]+"
                 id="salesOrderNumber"
-                name="salesOrderNumber">
+                name="salesOrderNumber" >
+
                 <button class="btn btn-outline-success" type="submit"><i class="fas fa-search-dollar"></i></button>
+
             </div>
         </form>
         </div>
         <div class="col"></div>
     </div>
+    </div>
+    
+        <?php if($saleOrder!=null){
+            echo '<table class="table table-bordered border-dark border-4 container" id="GeneralQuote">
+            <tr>
+                <td style="text-align:center" colspan="6">
+                    <h1>Payment Info</h1>
+                    <p>Ganesh Sweets Dharwad</p>
+                </td>
+            </tr>
+            <tr>
+                <!-- <th >Customer Name </th> -->
+                <td rowspan="3" colspan="5">
+                    <h5>Customer Details</h5>
+                    Customer Code :'.  $saleOrder->getCustomerCode() .' <br>
+                    To : '. $saleOrder->getCustomerName() .' <br>
+                    Address :'.  $saleOrder->getCustomerAddress() .'<br />
+                    Phone :'. $saleOrder->getCustomerContactNumber().'
+                </td>
+            </tr>
+            <tr>
+            
+                <td>
+                <h5>Sales Order Details</h5>
+                Sales Code&nbsp: &nbsp'. $saleOrder->getSOCode() .'<br> Sales Date : '.$saleOrder->get_salesdate().
+                '<br> Total Amount : '.$saleOrder->get_totalAmount().
+                  
+                '</td>
+            </tr>
+            <tr>
+              
+            </tr>
+            <tr>
+                <th style="text-align:center" colspan="1">Sl</th>
+                <th colspan="3" style="text-align:center">Description</th>
+                <th style="text-align:center">Qty</th>
+
+
+                <th style="text-align:center">Amount</th>
+            </tr>
+           
+            <tr>
+                <td style="text-align:right" rowspan="" colspan="3">
+                    Returns
+                </td>
+                <td style="text-align:right">Total</td>
+                <td style="text-align:center"></td>
+                <td id="totalAmount" style="text-align:center">
+                    <?php echo $sum ?>
+                </td>
+
+            </tr>
+
+            <tr>
+                <td colspan="6">
+                    <h3 id="inwords"></h3>
+                </td>
+            </tr>
+            <tr>
+                <th colspan="6">
+                    Terms and Conditions
+                </th>
+            </tr>
+
+        </table>';
+        }
+            ?>
 </div>
 <?php include('footer.php'); ?>
 <div class="modal fade" id=customerModal tabindex=-1 role=dialog aria-hidden=true>
