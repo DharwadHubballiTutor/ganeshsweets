@@ -9,6 +9,7 @@ class SalesOrder implements JsonSerializable
     private $Quantity;
     private $TotalAmt;
     private $PendingAmt;
+   
     private $salesPDFName;
     private $SalesDate;
     private $Unit;
@@ -146,6 +147,8 @@ class SalesOrder implements JsonSerializable
                 'Quantity'=>$this->Quantity,
                 'UnitName'=>$this->unitName,
                 'salesPDFName' => $this->salesPDFName,
+                
+                
                 
         ];
     }
@@ -333,6 +336,8 @@ class SalesOrder implements JsonSerializable
 
         return $this;
     }
+
+   
 }
 
 

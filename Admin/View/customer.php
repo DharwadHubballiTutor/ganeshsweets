@@ -162,7 +162,7 @@ require_once("../Model/enq_cat_mappingmodel.php");
                     </div>
                     <div class="form-group">
                         <div class="row">
-                            <label class="col-md-4 text-right">Email <span class="text-danger">*</span></label>
+                            <label class="col-md-4 text-right">Email <span class="text-danger"></span></label>
                             <div class="col-md-8">
                                 <input type="email" 
                                 class="form-control" 

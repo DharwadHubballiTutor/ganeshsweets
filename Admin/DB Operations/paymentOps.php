@@ -2,7 +2,7 @@
 // require "../Admin/session.php";
 require_once "../DB Operations/dbconnection.php";
 require_once "../../Admin/Model/customerModel.php";
-
+require_once "../../Admin/Model/paymentmodel.php";
 
     class DBpayment
     {
@@ -25,7 +25,45 @@ require_once "../../Admin/Model/customerModel.php";
       
         error_log($sql);
       }
+public static function getPaymentInfoBySalesOrderId($SalesOrderId){
+  $db = ConnectDb::getInstance();
+  $connectionObj = $db->getConnection();
+  $sql = "SELECT
+  P.SOID AS Id,
+  P.customer_id AS Custid,
+  P.paid_amount AS PaidAmt ,
+  p.pending_amount AS PendingAmount,
+  P.payment_mode AS paymentmode,
+  P.received_amount AS  ReceivedAmt,
+  P.total_amount AS TotalAmount
+  from PaymentInfo AS P
+  
+  
+  where P.SOID=".$SalesOrderId;
+  error_log($sql);
+  $result = $connectionObj->query($sql);
+  $count = mysqli_num_rows($result);
+  $PaymentList = [];
+  if ($count > 0) {
+      while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+          $Payment = new Payment();
+         
+          $Payment->set_SOID($row['Id']);
+          // $customer->setCustomerCode($row['customerCode']);
+          $Payment->set_custid($row['Custid']);   
+          $Payment->set_totalAmt($row["TotalAmount"]);
+          $Payment->set_pendingAmt($row["TotalAmount"]-$row["PaidAmt"]);
+          $Payment->set_paidAmt($row["PaidAmt"]);
+          $Payment->set_receivedamt($row['ReceivedAmt']);
+          $Payment->set_paymentmode($row['paymentmode']);
+          array_push($PaymentList, $Payment);
+      }
+  } else {
+      // echo "0 results";
+  }
+  return $PaymentList;
 
+}
       public static function getcustomerpayment()
       {
           $db = ConnectDb::getInstance();
@@ -76,7 +114,7 @@ require_once "../../Admin/Model/customerModel.php";
           if (mysqli_num_rows($result) > 0) {
           while($row = mysqli_fetch_assoc($result)) {
           $view= new Payment();
-          $view->set_modifiedon($row['modifiedon']);
+          //$view->set_modifiedon($row['modifiedon']);
           $view->set_paidamt($row['paid_amount']);
           $view->set_pendingamt($row['pending_amount']);
           $view->set_paymentmode($row['payment_mode']);

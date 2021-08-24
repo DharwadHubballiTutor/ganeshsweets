@@ -184,6 +184,7 @@ require_once("../Model/item_subcategorymodel.php");
                             <label class="col-md-4 text-right">SubCategory Name <span
                                     class="text-danger">*</span></label>
                             <div class="col-md-8">
+                                
                                 <input type="text" name="itemsubcatname" id="editeditemsubcatname" class="form-control"
                                     required data-parsley-pattern="/^[a-zA-Z\s]+$/" data-parsley-maxlength="150"
                                     data-parsley-trigger="keyup" />
@@ -293,7 +294,7 @@ $(document).ready(function() {
         $.ajax({
             type: "POST",
             url: config.developmentPath+
-                "/Admin/Controller/item_categorycontroller.php",
+                "/Admin/Controller/item_subcategorycontroller.php",
             data: formData,
             dataType: "json",
             encode: true,
@@ -324,7 +325,7 @@ $(document).ready(function() {
     $('#deletebutton').click(function() {
         
         $.ajax({
-            url:  config.developmentPath+"/Admin/Controller/item_categorycontroller.php",
+            url:  config.developmentPath+"/Admin/Controller/item_subcategorycontroller.php",
             method: "POST",
             data: {
                 id: $('#itemsubcatid').val(),
