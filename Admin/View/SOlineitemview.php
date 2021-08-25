@@ -170,7 +170,7 @@ $id = $_GET['id'];
 
                                 <label class="col-md-3 text-right">Item Quantity <span class="text-danger">*</span></label>
                                 <div class="col-md-3 input-group">
-                                    <input type="text" name="quantity" id="quantity" class="form-control" required>
+                                    <input type="number" name="quantity" id="quantity" class="form-control" pattern="[0-9]+" title="please enter number only"required>
                                     <select class="input-group-text" id="unit" class="form-select" required name="unit"></select>
                                 </div>
 
@@ -252,7 +252,7 @@ $id = $_GET['id'];
                                 </div>
                                 <label class="col-md-3 text-right">Item Quantity <span class="text-danger">*</span></label>
                                 <div class="col-md-3">
-                                    <input type="text" name="editedquantity" id="editedquantity" class="form-control" required />
+                                    <input type="number" name="editedquantity" id="editedquantity" class="form-control" pattern="[0-9]+" title="please enter number only"required />
                                 </div>
                             </div>
                         </div>

@@ -59,7 +59,7 @@ require_once("../Model/salesorderModel.php");
                                 <div class="row">
                                     <label class="col-md-3 text-right">Item Quantity <span class="text-danger">*</span></label>
                                     <div class="col-md-3 input-group">
-                                        <input type="text" name="itemquantity" id="itemquantity" class="form-control" required>
+                                        <input type="number" name="itemquantity" id="itemquantity" class="form-control" pattern="[0-9]+" title="please enter number only" required/>
                                         <select class="input-group-text" id="unit" class="form-select" required name="unit"></select>
                                     </div>
                                     <label class="col-md-3 text-right">Per Unit Price<span class="text-danger">*</span></label>
@@ -256,7 +256,7 @@ include "footer.php";
             $('#totalAmount').val(this.value * $('#itemquantity').val());
         })
         $('#saleOrder_form').submit(function(event) {
-        
+        debugger;
             $.ajax({
                 type: "POST",
                 url: config.developmentPath + "/Admin/Controller/salesordercontroller.php",

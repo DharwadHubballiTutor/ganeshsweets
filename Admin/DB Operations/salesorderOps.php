@@ -142,6 +142,7 @@ class DBsales
     CU.customerContactNumber As customerContactNumber,
     CU.	customerCode AS customerCode,
     SO.SOID AS salesid,
+    
     SUM(SO.TotalAmt) AS TotalAmt
     FROM `sales_order` 
     AS S 

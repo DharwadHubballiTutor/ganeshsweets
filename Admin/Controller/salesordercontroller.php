@@ -1,13 +1,13 @@
 <?php
 
-require "../Model/salesorderModel.php";
-require "../Utilities/Sanitization.php";
-include "../DB Operations/salesorderOps.php";
-include  "../DB Operations/customerOps.php ";
-require "../Model/SOlineitemModel.php";
-include  "../DB Operations/SOlineitemOps.php ";
-include  "../DB Operations/paymentOps.php ";
-require "../Model/paymentmodel.php";
+require_once "../Model/salesorderModel.php";
+require_once "../Utilities/Sanitization.php";
+include_once "../DB Operations/salesorderOps.php";
+include_once  "../DB Operations/customerOps.php ";
+require_once "../Model/SOlineitemModel.php";
+include_once "../DB Operations/SOlineitemOps.php ";
+include_once  "../DB Operations/paymentOps.php ";
+require_once "../Model/paymentmodel.php";
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
       if (isset($_POST['obj'])) {

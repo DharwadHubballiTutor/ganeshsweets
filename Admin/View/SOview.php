@@ -541,7 +541,7 @@ $(document).ready(function() {
         // }
         if (this.cells[9].innerHTML != "") {
 
-            $('#downloadSO').attr('href', '../pdfs/salesorder/' + this.cells[9].innerHTML);
+            $('#downloadSO').attr('href', '../pdfs/salesorder/' + this.cells[10].innerHTML);
         } else {
             $('#downloadSO').removeAttr('target');
             $('#downloadSO').attr('onclick', 'alert("Please save the Quotation as PDF")');

@@ -86,6 +86,7 @@ class DBcustomer
         $sql = "UPDATE customer SET customerCode='". $customer->getCustomerCode() . 
             "', customerName='" . $customer->get_customerName() .
             "', customerContactNumber='" . $customer->get_customerPhone() .
+            "', customerEmail='" . $customer->get_customerEmail() .
             "', customerAddress='" . $customer->get_customerAddress() .
             "', customerState='" . $customer->get_customerState() .
             "', customerCity='" . $customer->get_customerCity() .

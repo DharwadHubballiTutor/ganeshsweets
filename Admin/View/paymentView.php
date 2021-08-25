@@ -28,14 +28,14 @@ if ($_SERVER["REQUEST_METHOD"]=="GET") {
                 <h6 class="m-0 font-weight-bold text-primary">Customer List</h6>
             </div>
             <div class="col" align="right">
-                <span data-toggle=modal data-target=#customerModal>
+                <span data-toggle=modal data-target=#paymentinfoModal>
                     <button type="button" + class="btn btn-success btn-circle btn-sm"><i
                             class="fas fa-plus"></i></button>
                 </span>
             </div>
         </div>
     </div>
-    
+
     <div class="card-body">
         <div class="row">
             <div class="col">
@@ -166,134 +166,144 @@ if ($_SERVER["REQUEST_METHOD"]=="GET") {
 
 </div>
 <?php include('footer.php'); ?>
-<div class="modal fade" id=customerModal tabindex=-1 role=dialog aria-hidden=true>
-    <div class="modal-dialog">
-        <form method="post" id="customer_form" enctype="multipart/form-data" action="../Controller/customer.php">
+<div class="modal fade" id=paymentinfoModal tabindex=-1 role=dialog aria-hidden=true>
+    <div class="modal-dialog modal-xl">
+        <form method="post" id="paymentinfo_form" enctype="multipart/form-data"
+            action="../Controller/paymentcontroller.php">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="modal_title">Add Data</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                <div class="modal-body">
-                    <span id="form_message"></span>
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-4 text-right">Name <span class="text-danger">*</span></label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="customerName" name="customerName">
-                                <input type="hidden" class="form-control" id="enqId" name="enqId" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-4 text-right">Date of visit. <span class="text-danger">*</span></label>
-                            <div class="col-md-8">
-                                <input type="date" class="form-control" id="customerDov" name="customerDov">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-4 text-right">Email <span class="text-danger">*</span></label>
-                            <div class="col-md-8">
-                                <input type="email" class="form-control" id="customerEmail" name="customerEmail">
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-12">
+                    <form class="form" action="../Controller/paymentcontroller.php" method="POST" id="myForm"
+                        enctype="multipart/form-data">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="col-md-6 control-label">Sales Order Code <span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-sm-12">
+                                                <input type="text" name="Socode" id="Socode" class="form-control"
+                                                    required data-parsley-pattern="/^[a-zA-Z\s]+$/"
+                                                    data-parsley-maxlength="150" data-parsley-trigger="keyup" readonly value="<?php echo  $saleOrder->getSOCode() ?>"/>
+                                                
+                                                <input type="hidden" id="paymentid" name="paymentid" value="">
+                                                <input type="hidden" id="SOID" name="SOID" value="">
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="col-md-6">
+                                            <label class="col-md-6 control-label">Total Amount<span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-sm-12">
+                                                <input type="text" name="totalamt" id="totalamt" class="form-control"
+                                                    required data-parsley-trigger="keyup" value="<?php echo   $saleOrder->get_totalAmount() ?>" disabled/>
+                                            </div>
+                                        </div>
+                                        <br />
 
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-4 text-right">Mobile<span class="text-danger">*</span></label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="customerPhone" name="customerPhone">
-                            </div>
-                        </div>
-                    </div>
+                                        <div class="col-md-6">
+                                            <label class="col-md-6 control-label"> Paid Amount<span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-sm-12">
+                                                <input type="text" name="paidamt" id="paidamt" class="form-control"
+                                                    data-parsley-trigger="keyup"    disabled/>
+                                            </div>
+                                        </div>
+                                        <br />
 
-                    <div class="form-group">
-                        <div class="row">
+                                        <div class="col-md-6">
+                                            <label class="col-md-6 control-label">Received Amount<span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-sm-12">
+                                                <input type="text" name="receivedamt" id="receivedamt"
+                                                    class="form-control" required data-parsley-trigger="keyup" />
+                                            </div>
+                                        </div>
+                                        <br />
 
-                            <label class="col-md-4 text-right">Address line<span class="text-danger">*</span></label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="customerAddress" placeholder="1234 Main St"
-                                    name="customerAddress">
+                                        <div class="col-md-6">
+                                            <label class="col-md-6 control-label">Pending Amount<span
+                                                    class="text-danger">*</span></label>
+                                            <div class="col-sm-12">
+                                                <input type="text" name="pendingamt" id="pendingamt"
+                                                    class="form-control" required data-parsley-trigger="keyup" disabled />
+                                            </div>
+                                        </div>
+                                        <br />
+
+                                        <div id="duedatediv" class="col-md-6" style="display: none">
+                                            <label for="duedate" class="col-md-6 control-label"> Next payment
+                                                on:</label>
+                                            <div class="col-sm-12">
+                                                <input type="date" id="duedate" name="duedate" class="form-control"
+                                                    required />
+                                            </div>
+                                        </div>
+                                        <br />
+
+                                        <div class="col-md-6">
+                                            <label for="pmode" class="col-md-6 control-label">Payment Mode</label>
+                                            <div class="col-sm-12">
+                                                <select class="form-select" id="paymentmode" name="paymentmode"
+                                                    required>
+                                                    <option value=""></option>
+                                                    <option value="Cash">Cash</option>
+                                                    <option value="UPI transaction">UPI transaction</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <br />
+                                        <div class="col-md-6">
+                                            <label for="paymentdescription" class="col-md-6 control-label">Payment
+                                                Comments</label>
+                                            <div class="col-sm-12">
+                                                <textarea type="text" id="paymentdescription" name="paymentdescription"
+                                                    placeholder="Payment Comments" class="form-control" required></textarea>
+                                            </div>
+                                        </div>
+                                        <br />
+
+                                        <div class="col-md-6">
+                                            <input type="hidden" name="modifiedby" id="modifiedby" class="form-control"
+                                                required data-parsley-type="integer" data-parsley-minlength="10"
+                                                data-parsley-maxlength="12" data-parsley-trigger="keyup"
+                                                value="<?php echo $_SESSION['login_user']; ?>" />
+
+                                        </div>
+
+                                        <div>
+                                            <button class="btn btn-success" id="btn" type="submit"
+                                                name="submit">Update</button>
+                                            <br />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-4 text-right">City <span class="text-danger">*</span></label>
-                            <div class="col-md-8">
-                                <input type="text" class="form-control" id="customerCity" name="customerCity">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="row">
-                            <label class="col-md-4 text-right">State <span class="text-danger">*</span></label>
-                            <div class="col-md-8">
-                                <select id="customerState" name="customerState" class="form-select" required>
-                                    <option selected="selected" value="">Select State</option>
-                                    <option value="ANDHRA PRADESH">ANDHRA PRADESH</option>
-                                    <option value="ARUNACHAL PRADESH">ARUNACHAL PRADESH</option>
-                                    <option value="ASSAM">ASSAM</option>
-                                    <option value="BIHAR">BIHAR</option>
-                                    <option value="CHANDIGARH">CHANDIGARH</option>
-                                    <option value="CHATTISGARH">CHATTISGARH</option>
-                                    <option value="DADRA & NAGAR HAVELI">DADRA & NAGAR HAVELI</option>
-                                    <option value="DAMAN & DIU">DAMAN & DIU</option>
-                                    <option value="DELHI">DELHI</option>
-                                    <option value="GOA">GOA</option>
-                                    <option value="GUJARAT">GUJARAT</option>
-                                    <option value="HARYANA">HARYANA</option>
-                                    <option value="HIMACHAL PRADESH">HIMACHAL PRADESH</option>
-                                    <option value="JAMMU & KASHMIR">JAMMU & KASHMIR</option>
-                                    <option value="JHARKHAND">JHARKHAND</option>
-                                    <option value="KARNATAKA">KARNATAKA</option>
-                                    <option value="KERALA">KERALA</option>
-                                    <option value="LAKSHADWEEP">LAKSHADWEEP</option>
-                                    <option value="MADHYA PRADESH">MADHYA PRADESH</option>
-                                    <option value="MAHARASHTRA">MAHARASHTRA</option>
-                                    <option value="MANIPUR">MANIPUR</option>
-                                    <option value="MEGHALAYA">MEGHALAYA</option>
-                                    <option value="MIZORAM">MIZORAM</option>
-                                    <option value="NAGALAND">NAGALAND</option>
-                                    <option value="ODISHA">ODISHA</option>
-                                    <option value="PONDICHERRY">PONDICHERRY</option>
-                                    <option value="PUNJAB">PUNJAB</option>
-                                    <option value="RAJASTHAN">RAJASTHAN</option>
-                                    <option value="SIKKIM">SIKKIM</option>
-                                    <option value="TAMIL NADU">TAMIL NADU</option>
-                                    <option value="TELANGANA">TELANGANA</option>
-                                    <option value="TRIPURA">TRIPURA</option>
-                                    <option value="UTTAR PRADESH">UTTAR PRADESH</option>
-                                    <option value="UTTARAKHAND">UTTARAKHAND</option>
-                                    <option value="WEST BENGAL">WEST BENGAL</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-8">
-                        <input type="hidden" name="createdby" id="createdby" class="form-control" required
-                            data-parsley-type="integer" data-parsley-minlength="10" data-parsley-maxlength="12"
-                            data-parsley-trigger="keyup" value="<?php echo $_SESSION['login_user']; ?>" />
-                        <input type="hidden" name="modifiedby" id="modifiedby" class="form-control" required
-                            data-parsley-type="integer" data-parsley-minlength="10" data-parsley-maxlength="12"
-                            data-parsley-trigger="keyup" value="<?php echo $_SESSION['login_user']; ?>" />
-                    </div>
+                    </form>
                 </div>
-
-                <div class="modal-footer">
-                    <input type="hidden" name="hidden_id" id="hidden_id" />
-                    <input type="hidden" name="action" id="action" value="Add" />
-                    <input type="submit" name="submit" id="addCustomer" class="btn btn-success" value="Save" />
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <div class="col-md-8">
+                    <input type="hidden" name="createdby" id="createdby" class="form-control" required
+                        data-parsley-type="integer" data-parsley-minlength="10" data-parsley-maxlength="12"
+                        data-parsley-trigger="keyup" value="<?php echo $_SESSION['login_user']; ?>" />
+                    <input type="hidden" name="modifiedby" id="modifiedby" class="form-control" required
+                        data-parsley-type="integer" data-parsley-minlength="10" data-parsley-maxlength="12"
+                        data-parsley-trigger="keyup" value="<?php echo $_SESSION['login_user']; ?>" />
                 </div>
             </div>
-        </form>
+
+            <div class="modal-footer">
+                <input type="hidden" name="hidden_id" id="hidden_id" />
+                <input type="hidden" name="action" id="action" value="Add" />
+               
+            </div>
     </div>
+    </form>
 </div>
+
 
 <div class="modal fade" id=infoCustomerModal tabindex=-1 role=dialog aria-hidden=true>
     <div class="modal-dialog modal-lg">
@@ -376,10 +386,6 @@ if ($_SERVER["REQUEST_METHOD"]=="GET") {
         </div>
     </div>
 </div>
-
-
-
-
 <div class="modal fade" id=paymentinfoModal tabindex=-1 role=dialog aria-hidden=true>
     <div class="modal-dialog modal-xl">
         <div class="row gutters-sm">
@@ -391,7 +397,10 @@ if ($_SERVER["REQUEST_METHOD"]=="GET") {
                     <label class="btn btn-danger" for="option2">Edit</label>
                 </div>
             </div>
-            <div class="col-md-10">
+
+            <!-- Payment code -->
+
+            <!-- <div class="col-md-10">
                 <form class="form" action="../Controller/paymentcontroller.php" method="POST" id="myForm"
                     enctype="multipart/form-data">
                     <div class="modal-content">
@@ -528,11 +537,10 @@ if ($_SERVER["REQUEST_METHOD"]=="GET") {
                         </div>
                 </form>
 
-            </div>
+            </div>-->
         </div>
     </div>
-
-
+</div>
     <div class="modal fade" id=editedpaymentinfoModal tabindex=-1 role=dialog aria-hidden=true>
         <div class="modal-dialog modal">
             <br />
@@ -675,179 +683,144 @@ if ($_SERVER["REQUEST_METHOD"]=="GET") {
     <script>
     $(document).ready(function() {
 
-        // $("#myForm :input").prop("disabled", true);
+                $("#myForm :input").prop("disabled", true);
 
-        // $('input[type=radio][name=edit]').click(function() {
-        //     $('#myForm :input').prop('disabled', false);
-        //     if (!parseInt($('#totalamt').val())) {
-        //         $('#totalamt').focus();
-        //         $('#paidamt').attr('disabled', true);
-        //     } else {
-        //         $('#totalamt').attr('readonly', true);
-        //     }
-
-
-        // });
+                $('input[type=radio][name=edit]').click(function() {
+                    $('#myForm :input').prop('disabled', false);
+                    if (!parseInt($('#totalamt').val())) {
+                        $('#totalamt').focus();
+                        $('#paidamt').attr('disabled', true);
+                    } else {
+                        $('#totalamt').attr('readonly', true);
+                    }
 
 
+                });
+                $('#PDF').on('click', function(e) {
 
+                    $('#GeneralQuote tr').each(function() {
+                        $(this).find('td:first button').remove();
+                    })
+                });
+                $('#PI-PDF').on('click', function(e) {
 
-       // $('#PDF').on('click', function(e) {
+                    $('#PI-table tr').each(function() {
+                        $(this).find('td:first button').remove();
+                    })
+                })
+                $('#itemListForm').submit(function(e) {
+                    var content = $('#printsales').html();
+                    var fileName = $('#salescode').text() + $('#listquoteCode').text() + '_SO';
+                    var uniturl = config.developmentPath + "/Admin/Controller/pdfGeneratorContorller.php";
+                    $.ajax({
+                        type: "POST",
+                        url: uniturl,
+                        data: {
+                            "modifiedby": $('#modifiedby').val(),
+                            "salesOrderNumber": $('#salesOrderNumber').val(),
+                            "fileType": "salesorder",
+                            "waterMarked": waterMarked,
+                            "fileName": fileName.trim(),
+                            "html": content
+                        },
+                        dataType: "json",
+                        encode: true,
+                    }).done(function(data) {
+                        console.log(data);
+                    });
 
-            $('#GeneralQuote tr').each(function() {
-                $(this).find('td:first button').remove();
-            })
-        });
-        $('#PI-PDF').on('click', function(e) {
+                    window.open(config.developmentPath + '/Admin/pdfs/salesorder/' + fileName.trim() + '.pdf');
+                });
 
-            $('#PI-table tr').each(function() {
-                $(this).find('td:first button').remove();
-            })
-        })
-        $('#itemListForm').submit(function(e) {
-            var content = $('#printsales').html();
-            var fileName = $('#salescode').text() + $('#listquoteCode').text() + '_SO';
-            var uniturl = config.developmentPath + "/Admin/Controller/pdfGeneratorContorller.php";
-            $.ajax({
-                type: "POST",
-                url: uniturl,
-                data: {
-                    "modifiedby": $('#modifiedby').val(),
-                    "salesOrderNumber": $('#salesOrderNumber').val(),
-                    "fileType": "salesorder",
-                    "waterMarked": waterMarked,
-                    "fileName": fileName.trim(),
-                    "html": content
-                },
-                dataType: "json",
-                encode: true,
-            }).done(function(data) {
-                console.log(data);
-            });
+                    $('#paymentinfoModal').on('show.bs.modal', function(e) {
+                        var rowid = $(e.relatedTarget).data('id');
+                        $('#Socode').val(rowid);
 
-            window.open(config.developmentPath + '/Admin/pdfs/salesorder/' + fileName.trim() + '.pdf');
-        //});
+                    });
+                    var dataTable = $('#Customer_table').DataTable({
 
+                    });
 
+                    var nEditing = null;
 
+                    $('#Customer_table tbody').on('click', 'tr', function() {
+                        /* Get the row as a parent of the link that was clicked on */
+                        $('#custname').val(this.cells[1].innerHTML);
+                        $('#custcontactno').val(this.cells[2].innerHTML);
+                        $('#totalamt').val(this.cells[3].innerHTML);
+                        $('#pendingamt').val(this.cells[5].innerHTML);
+                        $('#paidamt').val(this.cells[4].innerHTML);
+                    });
+                    $('#editbutton').click(function(event) {
+                        var formData = {
+                            customerid: $('#custid').val(),
+                            custname: $('#custname').val(),
+                            custcontactno: $('#custcontactno').val(),
+                        };
 
+                        $.ajax({
+                            type: "POST",
+                            url: window.location.origin +
+                                "/acedecor/Admin/Controller/paymentcontroller.php/",
+                            data: formData,
+                            dataType: "json",
+                            encode: true,
+                        }).done(function(data) {
+                            console.log(data);
+                        });
+                        $('#editbutton').dispose();
+                        event.preventDefault();
+                    });
+                    $("#paymentplan").change(function() {
 
-        $('#paymentinfoModal').on('show.bs.modal', function(e) {
-            var rowid = $(e.relatedTarget).data('id');
-            $('#custid').val(rowid);
+                        if ($(this).val() == "Part Payment") {
+                            $("#duedatediv").show();
+                            var today = new Date();
+                            var dd = String(today.getDate()).padStart(2, '0');
+                            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+                            var yyyy = today.getFullYear();
 
-        });
-        var dataTable = $('#Customer_table').DataTable({
+                            today = yyyy + '-' + mm + '-' + dd;
 
-        });
+                            $("#duedate").attr("min", today);
+                            $("#duedate").attr('disabled', false);
+                            $("#btn").attr("disabled", false);
+                        } else {
+                            debugger;
+                            if (parseInt($("#paidamt").val()) > 0 && parseInt($("#pendingamt").val()) !=
+                                0) {
+                                $("#btn").attr("disabled", true);
+                                alert("Payment is still due");
+                            }
 
-        var nEditing = null;
+                            $("#duedate").attr('disabled', true);
+                        }
+                    });
 
-        $('#Customer_table tbody').on('click', 'tr', function() {
-            /* Get the row as a parent of the link that was clicked on */
-            $('#custname').val(this.cells[1].innerHTML);
-            $('#custcontactno').val(this.cells[2].innerHTML);
-            $('#totalamt').val(this.cells[3].innerHTML);
-            $('#pendingamt').val(this.cells[5].innerHTML);
-            $('#paidamt').val(this.cells[4].innerHTML);
-        });
-        $('#editbutton').click(function(event) {
-            var formData = {
-                customerid: $('#custid').val(),
-                custname: $('#custname').val(),
-                custcontactno: $('#custcontactno').val(),
+                    $("#totalamt").change(function() {
+                        if (parseInt($(this).val()) > 0) {
+                            $('#paidamt').attr('disabled', false);
+                        }
+                    });
 
-
-            };
-
-            $.ajax({
-                type: "POST",
-                url: window.location.origin +
-                    "/acedecor/Admin/Controller/paymentcontroller.php/",
-                data: formData,
-                dataType: "json",
-                encode: true,
-            }).done(function(data) {
-                console.log(data);
-            });
-            $('#editbutton').dispose();
-            event.preventDefault();
-        });
-
-
-        $("#paymentplan").change(function() {
-
-            if ($(this).val() == "Part Payment") {
-                $("#duedatediv").show();
-                var today = new Date();
-                var dd = String(today.getDate()).padStart(2, '0');
-                var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
-                var yyyy = today.getFullYear();
-
-                today = yyyy + '-' + mm + '-' + dd;
-
-                $("#duedate").attr("min", today);
-                $("#duedate").attr('disabled', false);
-                $("#btn").attr("disabled", false);
-            } else {
-                debugger;
-                if (parseInt($("#paidamt").val()) > 0 && parseInt($("#pendingamt").val()) != 0) {
-                    $("#btn").attr("disabled", true);
-                    alert("Payment is still due");
-                }
-
-                $("#duedate").attr('disabled', true);
-            }
-        });
-
-        $("#totalamt").change(function() {
-            if (parseInt($(this).val()) > 0) {
-                $('#paidamt').attr('disabled', false);
-            }
-        });
-
-        $("#receivedamt").change(function() {
-            debugger;
-            if (parseInt($(this).val()) < parseInt($("#totalamt").val())) {
-                if ($("#pendingamt").val() == 0) {
-                    var pendingfees = $("#totalamt").val() - $("#receivedamt").val();
-                } else {
-                    var pendingfees = $("#pendingamt").val() - $("#receivedamt").val();
-
-                }
-                $("#pendingamt").val(pendingfees);
-            }
-            var paidfees = $("#totalamt").val() - $("#pendingamt").val();
-            $("#paidamt").val(paidfees);
-        });
-
-
-
-
-
-
-
-
-
-        if (parseInt($("#receivedamt").val()) == parseInt($("#totalamt").val())) {
-            $("#myForm :input").prop("disabled", true);
-            $("#option2").prop("disabled", true);
-        }
-
-
-        // $("#paymentmode").change(function() {
-        //     // debugger;
-        //     // if ($(this).val() == "Net Banking") {
-        //     //     $("#rtgsdiv").show();
-        //     //     $("#chequediv").hide();
-        //     // } else {
-        //     //     if ($(this).val() == "Cheque") {
-        //     //         $("#rtgsdiv").hide();
-        //     //         $("#chequediv").show();
-        //     //     }
-        //     //     $("#rtgsdiv").hide();
-        //     //     $("#chequediv").hide();
-        //     // }
-        // });
-    });
+                    $("#receivedamt").change(function() {
+                        debugger;
+                        if (parseInt($(this).val()) < parseInt($("#totalamt").val())) {
+                            if ($("#pendingamt").val() == 0) {
+                                var pendingfees = $("#totalamt").val() - $("#receivedamt").val();
+                            } else {
+                                var pendingfees = $("#pendingamt").val() - $("#receivedamt").val();
+                            }
+                            $("#pendingamt").val(pendingfees);
+                        }
+                        var paidfees = $("#totalamt").val() - $("#pendingamt").val();
+                        $("#paidamt").val(paidfees);
+                    });
+                    if (parseInt($("#receivedamt").val()) == parseInt($("#totalamt").val())) {
+                        $("#myForm :input").prop("disabled", true);
+                        $("#option2").prop("disabled", true);
+                    }
+                });
+                
+    
     </script>
