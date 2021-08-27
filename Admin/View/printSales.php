@@ -58,7 +58,7 @@ $firstsales = DBsales::getSalesForPrint($salesId);
                 </tr>
                 <tr>
                     <td>Sales Id&nbsp: &nbsp <?php echo $firstsales->getSOCode() ?>
-                        <p id="salescode" style="display: none;"> <?php echo $firstsales->getSOCode() ?></p>
+                        <p id=" " style="display: none;"> <?php echo $firstsales->getSOCode() ?></p>
                     </td>
                 </tr>
                 <tr>
@@ -123,7 +123,7 @@ $firstsales = DBsales::getSalesForPrint($salesId);
                     <div class="row">
                         <input type="hidden" name="createdby" id="createdby" class="form-control" required value="<?php echo $_SESSION['login_user']; ?>" />
                         <input type="hidden" name="modifiedby" id="modifiedby" class="form-control" required value="<?php echo $_SESSION['login_user']; ?>" />
-                        <input type="hidden" id="salesId" value="<?php echo $firstsales->get_Id(); ?>" />
+                        <input type="hidden" id="salesId" value="<?php echo $firstsales->get_id(); ?>" />
                     </div>
                 </div>
                 <input type="submit" name="submit" id="PDF" class="btn btn-success" value="Save AS PDF" />
@@ -229,6 +229,7 @@ require_once "footer.php";
             })
         })
         $('#itemListForm').submit(function(e) {
+            debugger;
             var content = $('#printsales').html();
             var fileName = $('#salescode').text() + $('#listquoteCode').text() + '_SO';
             var uniturl = config.developmentPath + "/Admin/Controller/pdfGeneratorContorller.php";
@@ -251,27 +252,6 @@ require_once "footer.php";
 
             window.open(config.developmentPath + '/Admin/pdfs/salesorder/' + fileName.trim() + '.pdf');
         });
-        // $('#PIForm').submit(function(e) {
-        //     var content = $('#printPI').html();
-        //     var fileName = $('#customerCode').text() + $('#listquoteCode').text() + '_PROFORMA_Invoice';
-        //     var uniturl = config.developmentPath +
-        //         "/Admin/Controller/pdfGeneratorContorller.php";
-        //     $.ajax({
-        //         type: "POST",
-        //         url: uniturl,
-        //         data: {
-        //             "modifiedby": $('#modifiedby').val(),
-        //             "quoteId": $('#quoteId').val(),
-        //             "fileType": "quotations",
-        //             "waterMarked": waterMarked,
-        //             "fileName": fileName,
-        //             "html": content
-        //         },
-        //         dataType: "json",
-        //         encode: true,
-        //     }).done(function(data) {
-        //         console.log(data);
-        //     });
-        // });
+        
     });
 </script>

@@ -11,12 +11,12 @@ require_once "../../Admin/Model/paymentmodel.php";
         $db=ConnectDb::getInstance();
         $connectionObj=$db->getConnection();
         if($payObj->get_duedate()==""){
-          $sql = "insert into paymentinfo (`SOID`,`customer_id`, `total_amount`,`paid_amount`,`received_amount`,`pending_amount`, `payment_plan`,`payment_mode`,`payment_description`,`modified_by`) 
-                values ('".$payObj->get_SOID()."','".$payObj->get_custid()."','".$payObj->get_totalamt()."','".$payObj->get_paidamt()."','".$payObj->get_receivedamt()."','".$payObj->get_pendingamt()."','".$payObj->get_paymentplan()."','".$payObj->get_paymentmode()."','".$payObj->get_paymentdescription()."','".$payObj->get_modifiedby()."')";
+          $sql = "insert into paymentinfo ( `SOID`,`total_amount`,`paid_amount`,`received_amount`,`pending_amount`, `payment_mode`,`payment_description`,`modified_by`) 
+                values (".$payObj->get_SOID().",'".$payObj->get_totalamt()."','".$payObj->get_paidamt()."','".$payObj->get_receivedamt()."','".$payObj->get_pendingamt()."','".$payObj->get_paymentmode()."','".$payObj->get_paymentdescription()."','".$payObj->get_modifiedby()."')";
                 
         }else {
-         $sql = "insert into paymentinfo (`customer_id`, `total_amount`,`paid_amount`,`received_amount`,`pending_amount`, `payment_plan`,`payment_mode`,`payment_description`,`modified_by`) 
-         values ('".$payObj->get_custid()."','".$payObj->get_totalamt()."','".$payObj->get_paidamt()."','".$payObj->get_receivedamt()."','".$payObj->get_pendingamt()."','".$payObj->get_paymentplan()."','".$payObj->get_paymentmode()."','".$payObj->get_paymentdescription()."','".$payObj->get_modifiedby()."')";
+         $sql = "insert into paymentinfo ( `total_amount`,`paid_amount`,`received_amount`,`pending_amount`, `payment_mode`,`payment_description`,`modified_by`) 
+         values ( '".$payObj->get_totalamt()."','".$payObj->get_paidamt()."','".$payObj->get_receivedamt()."','".$payObj->get_pendingamt()."','".$payObj->get_paymentmode()."','".$payObj->get_paymentdescription()."','".$payObj->get_modifiedby()."')";
         }    
                 if ($connectionObj->query($sql) === TRUE) {
         } else {
@@ -30,11 +30,12 @@ public static function getPaymentInfoBySalesOrderId($SalesOrderId){
   $connectionObj = $db->getConnection();
   $sql = "SELECT
   P.SOID AS Id,
-  P.customer_id AS Custid,
+
   P.paid_amount AS PaidAmt ,
   p.pending_amount AS PendingAmount,
   P.payment_mode AS paymentmode,
   P.received_amount AS  ReceivedAmt,
+  P.pdfName AS pdfname,
   P.total_amount AS TotalAmount
   from PaymentInfo AS P
   
@@ -50,12 +51,13 @@ public static function getPaymentInfoBySalesOrderId($SalesOrderId){
          
           $Payment->set_SOID($row['Id']);
           // $customer->setCustomerCode($row['customerCode']);
-          $Payment->set_custid($row['Custid']);   
-          $Payment->set_totalAmt($row["TotalAmount"]);
-          $Payment->set_pendingAmt($row["TotalAmount"]-$row["PaidAmt"]);
+         // $Payment->set_custid($row['Custid']);   
+          $Payment->set_totalamt($row["TotalAmount"]);
+          $Payment->set_pendingamt($row["TotalAmount"]-$row["PaidAmt"]);
           $Payment->set_paidAmt($row["PaidAmt"]);
           $Payment->set_receivedamt($row['ReceivedAmt']);
           $Payment->set_paymentmode($row['paymentmode']);
+          $Payment->setpdfName($row['pdfname']);
           array_push($PaymentList, $Payment);
       }
   } else {
@@ -118,7 +120,7 @@ public static function getPaymentInfoBySalesOrderId($SalesOrderId){
           $view->set_paidamt($row['paid_amount']);
           $view->set_pendingamt($row['pending_amount']);
           $view->set_paymentmode($row['payment_mode']);
-          $view->set_custid($row['customer_id']);
+          //$view->set_custid($row['customer_id']);
           $view->set_paymentreceipt($row['paymentreceipt']);
          array_push($paymentdetails,$view);
         
@@ -129,6 +131,22 @@ public static function getPaymentInfoBySalesOrderId($SalesOrderId){
          return $paymentdetails;
        }
       
-    
+       public static function updateFileName($paymentobj)
+       {
+         $db = ConnectDb::getInstance();
+         $connectionObj = $db->getConnection();
+         $sql = "UPDATE paymentinfo SET ";
+     
+           $sql.="pdfName='".$paymentobj->get_pdfName();
+      
+         
+           "' WHERE paymentid=" . $paymentobj->get_paymentid();
+           error_log($sql);
+         if ($connectionObj->query($sql) === TRUE) {
+         } else {
+           echo "Error: " . $sql . "<br>" . $connectionObj->error;
+         }
+       }
+     
 
    }

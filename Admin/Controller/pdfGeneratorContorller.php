@@ -3,6 +3,7 @@ require_once("../vendor/autoload.php");
 require_once("../Model/quotationModel.php");
 require_once("../DB Operations/quotationOps.php");
 require_once("../DB Operations/salesorderOps.php");
+require_once("../DB Operations/paymentOps.php");
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $waterMarked = $_POST['waterMarked'];
     $mpdf = new \Mpdf\Mpdf([
@@ -15,7 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ]);
     $fileType = $_POST['fileType'];
     $fileName = $_POST['fileName'];
-   
+    
+   error_log($fileType);
+   error_log($fileName);
+
     if ($waterMarked == 'true') {
         $mpdf->WriteHTML('<watermarktext content="Ganesh Sweets" alpha="0.1" />');
     }
@@ -43,5 +47,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $Sales->set_salesPDFName($fileName.'.pdf');
         DBsales::updateFileName($Sales);
     }
+    else if ($fileType=='payments')
+    {
+        $payment= new payment();
+        $payment->set_paymentid($_POST['salesOrderNumber']);
+        $payment->setPdfName($fileName.'.pdf');
+        DBpayment::updateFileName($payment);
+    }
+
    
 }

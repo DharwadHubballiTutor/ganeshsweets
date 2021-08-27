@@ -18,6 +18,7 @@ class Payment  implements JsonSerializable
     private $RTGS_no;
     private $payment_receipt;
     private $modified_by;
+    private $pdfName;
     private $table_name = "paymentinfo";
 
     function set_SOID($SOID)
@@ -196,10 +197,32 @@ class Payment  implements JsonSerializable
                 'chequeimg'=>$this->cheque_img,
                 'duedate'=>$this->due_date,
                 'paymentdescription' =>$this->payment_description,
+                'pdfName' =>$this->pdfName,
+
                 'paymentreceipt' =>$this->payment_receipt,
 
 
             
         ];
+    }
+
+    /**
+     * Get the value of pdfName
+     */ 
+    public function getPdfName()
+    {
+        return $this->pdfName;
+    }
+
+    /**
+     * Set the value of pdfName
+     *
+     * @return  self
+     */ 
+    public function setPdfName($pdfName)
+    {
+        $this->pdfName = $pdfName;
+
+        return $this;
     }
 }

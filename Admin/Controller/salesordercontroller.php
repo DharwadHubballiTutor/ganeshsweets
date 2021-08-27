@@ -70,5 +70,8 @@ require_once "../Model/paymentmodel.php";
     header("location:../Admin/View/SOview.php");  
   }
   if ($_SERVER["REQUEST_METHOD"]=="GET") {
-        
+ 
+    
         }
+?>
+

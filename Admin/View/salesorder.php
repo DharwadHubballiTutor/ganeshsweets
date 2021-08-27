@@ -27,7 +27,7 @@ require_once("../Model/salesorderModel.php");
                                         <select id="customer" class="form-select" required name="customer">
 
                                         </select>
-                                    </div>
+                                    </div> 
                                     <label class="col-md-3 text-right">Category Name <span class="text-danger">*</span></label>
                                     <div class="col-md-3">
                                         <select id="itemCategory" class="form-select" required name="itemCategory">
