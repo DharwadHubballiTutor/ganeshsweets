@@ -3,14 +3,16 @@ class Item_Details implements JsonSerializable
 {
     private $item_id ;
     private $item_name;
+    private	$item_description;
     private $item_categoryname;
     private $item_subcategoryname;
     private	$item_catid;
     private $item_subcatid;
+    private $item_image;
     private $item_modifiedby;
     private $item_createdby;
     private $table_name="item_details";
-   
+
    function set_itemid($itemid)
     {
         $this->item_id =$itemid;
@@ -46,7 +48,20 @@ class Item_Details implements JsonSerializable
         return $this->item_subcategoryname;
     }
 
-   
+
+
+    function set_itemdescription($itemdescription)
+    {
+        $this->item_description=$itemdescription;
+    }
+    function get_itemdescription()
+    {
+        return $this->item_description;
+    }
+
+
+
+
     function set_itemcatid($itemcatid)
     {
         $this->item_catid =$itemcatid;
@@ -65,8 +80,18 @@ class Item_Details implements JsonSerializable
         return $this->item_subcatid ;
     }
 
-    
+    function set_itemimage($itemimage)
+    {
+        $this->item_image=$itemimage;
+    }
+    function get_itemimage()
+    {
+        return $this->item_image;
+    }
 
+
+
+    
     function set_itemcreatedby($itemcreatedby)
     {
         $this->item_createdby=$itemcreatedby;
@@ -85,20 +110,23 @@ class Item_Details implements JsonSerializable
         return $this->item_modifiedby;
     }
 
-   
+ 
+
     public function jsonSerialize()
     {
         return [
                 'itemname' => $this->item_name,
                 'itemid' => $this->item_id,
-               
-             
-               
+
                 'subCategory'=>$this->item_subcatid,
                 'itemCategory' =>$this->item_catid,
-                
+              
+                'itemimage'=>$this->item_image,
+                'itemdescription' =>$this->item_description,
+
                 'itemmodifiedby' =>$this->item_modifiedby,
-                'itemcreatedby' =>$this->item_createdby
+                'itemcreatedby' =>$this->item_createdby 
+
         ];
     }
 }

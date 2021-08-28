@@ -52,16 +52,16 @@ require_once("../Model/unitsModel.php");
                             role='button' 
                             data-id='" . $unit->get_unitId() . "'> 
                             <i class='fas fa-user-edit'></i>
-                                Edit Brand
+                                Edit Unit
                            </button>
                            <button class='btn btn-primary dropdown-item'
                            data-toggle='modal' 
-                           data-target='#deleteCategoryModal' 
+                           data-target='#deleteUnitsModal' 
                            name='delete_button' 
                            role='button' 
                            data-id='" . $unit->get_unitId() . "'>
                             <i class='fas fa-trash-alt'></i>
-                              Delete Brand
+                              Delete Unit
                           </button>
                         </div>
                     </div>
@@ -191,12 +191,12 @@ require_once("../Model/unitsModel.php");
         <form method="POST" id="delete_category_form" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="modal_title">Delete Item Category</h4>
+                    <h4 class="modal-title" id="modal_title">Delete Unit</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <p class="lead">
-                        Are you sure. Would you like to delete this category record.
+                        Are you sure. Would you like to delete this Unit record.
                     </p>
                     <input type="hidden" name="itemcatid" id="itemcatid" value="">
                 </div>

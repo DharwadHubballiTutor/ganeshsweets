@@ -95,19 +95,23 @@ include('footer.php');
                     <span id="form_message"></span>
                     <div class="form-group">
                         <label>SGST</label>
-                        <input type="number" name="SGST" id="SGST" class="form-control"  />
+                        <input type="number" name="SGST" id="SGST" max=14 class="form-control"  />
                         <input type="hidden" name="GST" id="GST">
                     </div>
                     <div class="form-group">
                         <label>CGST</label>
-                        <input type="number" name="CGST" id="CGST" class="form-control"   />
+                        <input type="number" name="CGST" id="CGST" max=14 class="form-control"   />
                     </div>
                     <div class="form-group">
                         <label>IGST</label>
-                        <input type="number" name="IGST" id="IGST" class="form-control"   />
+                        <input type="number" name="IGST" id="IGST" max=28 class="form-control"   />
                     </div>
                     <div class="form-group">
                         <input type="hidden" name="createdby" id="createdby" class="form-control" required
+                                    value=<?php echo $_SESSION['login_user']; ?> />
+                    </div>
+                      <div class="form-group">
+                        <input type="hidden" name="modifiedby" id="modifiedby" class="form-control" required
                                     value=<?php echo $_SESSION['login_user']; ?> />
                     </div>
                 </div>
@@ -134,17 +138,17 @@ include('footer.php');
                     <span id="form_message"></span>
                     <div class="form-group">
                         <label>SGST</label>
-                        <input type="text" name="SGST" id="editedSGST" class="form-control"  />
+                        <input type="text" name="SGST" max=14 id="editedSGST" class="form-control"  />
                         <input type="hidden" name="tax_id" id="editedTaxId" class="form-control">
                         <input type="hidden" name="GST" id="editedGST" class="form-control">
                     </div>
                     <div class="form-group">
                         <label>CGST</label>
-                        <input type="text" name="CGST" id="editedCGST" class="form-control"   />
+                        <input type="text" name="CGST" max=14 id="editedCGST" class="form-control"   />
                     </div>
                     <div class="form-group">
                         <label>IGST</label>
-                        <input type="text" name="IGST" id="editedIGST" class="form-control"   />
+                        <input type="text" name="IGST" max=28 id="editedIGST" class="form-control"   />
                     </div>
                     <div class="form-group">
                         <input type="hidden" name="modifiedby" id="modifiedby" class="form-control" required
@@ -239,7 +243,7 @@ var urldata= config.developmentPath+"/Admin/Controller/taxController.php";
     });
     $('#deleteTaxModal').on('show.bs.modal', function(e) {
         var rowid = $(e.relatedTarget).data('id');
-        $('#editedTaxId').val(rowid);
+        $('#taxid').val(rowid);
     });
     $('#deletebutton').click(function() {
         $.ajax({

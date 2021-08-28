@@ -27,10 +27,12 @@ require_once("../Model/item_detailsmodel.php");
                 <thead>
                     <tr>
                         <th>Item Name</th>
+                        <th>Item Description</th>
                         <th style='display:none'>Category Id</th>
                         <th>Item Category</th>
                         <th style='display:none'>SubCategory Id</th>
                         <th>Item Subcategory</th>
+                         <th style='display:none'>Item image </th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -39,12 +41,14 @@ require_once("../Model/item_detailsmodel.php");
                     $itemdetailslist = DBitemdetails::getallItemdetails();
                     foreach ($itemdetailslist as $itemdetails) {
                         echo "<tr><td>" . $itemdetails->get_itemname() . "</td>
-                        
+                        <td>" . $itemdetails->get_itemdescription() . "</td>
                         <td style='display:none'>" . $itemdetails->get_itemcatid() . "</td>
                         <td>" . $itemdetails->get_itemcategoryname() . "</td>
                         <td style='display:none'>" . $itemdetails->get_itemsubcatid() . "</td>
                         <td>" . $itemdetails->get_itemsubcategoryname() . "</td>
-                        
+
+                        <td style='display:none'>" . $itemdetails->get_itemimage() . "</td>
+
                         <td>  <div class='dropdown'>
                         <button class='btn btn-secondary dropdown-toggle' 
                         type='button' 
@@ -94,7 +98,7 @@ require_once("../Model/item_detailsmodel.php");
 <div class="modal fade" id=itemdetailsModal tabindex=-1 role=dialog aria-hidden=true>
     <div class="modal-dialog modal-lg">
         <form method="post" id="itemdetails_form" enctype="multipart/form-data"
-            action="../Controller/item_detailscontroller.php">
+           action="../Controller/item_detailscontroller.php" >
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title" id="modal_title">Add Item Info</h4>
@@ -120,7 +124,7 @@ require_once("../Model/item_detailsmodel.php");
                             <label class="col-md-4 text-right">Item Category<span class="text-danger">*</span></label>
                             <div class="col-md-5">
                                 <select id="itemCategory" class="form-select" required name="itemCategory">
-
+                                   
                                 </select>
                             </div>
                             <div class="col-md-3">
@@ -144,7 +148,33 @@ require_once("../Model/item_detailsmodel.php");
                             </div>
                         </div>
                     </div>
-                   
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-4 text-right">Description<span
+                                    class="text-danger">*</span></label>
+                            <div class="col-md-8">
+                                <textarea  name="itemdescription" id="itemdescription" class="form-control"
+                                    required ></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-4 text-right">Upload Item Image <span
+                                    class="text-danger">*</span></label>
+                            <div class="col-md-8">
+                                <input type="file" name="itemimage" id="itemimage"
+                                 class="form-control"
+                                     />
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-8">
@@ -189,6 +219,7 @@ require_once("../Model/item_detailsmodel.php");
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 text-right">Item Name <span class="text-danger">*</span></label>
+
                             <div class="col-md-8">
                                 <input type="text" name="itemname" id="editeditemname" class="form-control" required
                                     data-parsley-pattern="/^[a-zA-Z\s]+$/" data-parsley-maxlength="150"
@@ -200,6 +231,9 @@ require_once("../Model/item_detailsmodel.php");
                             </div>
                         </div>
                     </div>
+
+
+              
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 text-right">Item Category<span class="text-danger">*</span></label>
@@ -207,7 +241,6 @@ require_once("../Model/item_detailsmodel.php");
                                 <select id="editeditemCategory" class="form-select" required name="itemCategory">
 
                                 </select>
-
                             </div>
                             <div class="col-md-3">
                                 <a class="btn btn-primary" data-toggle='modal' data-target='#itemcatModal'><i
@@ -215,6 +248,11 @@ require_once("../Model/item_detailsmodel.php");
                             </div>
                         </div>
                     </div>
+
+                    
+
+
+
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 text-right">Item Subcategory <span
@@ -230,6 +268,35 @@ require_once("../Model/item_detailsmodel.php");
                             </div>
                         </div>
                     </div>
+
+
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-4 text-right">Item Description<span
+                                    class="text-danger">*</span></label>
+                            <div class="col-md-8">
+                                <textarea  name="itemdescription" id="editeditemdescription" class="form-control"
+                                    required ></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="row">
+                            <label class="col-md-4 text-right">Upload Item Image <span
+                                    class="text-danger">*</span></label>
+                            <div class="col-md-8">
+                                <input type="file" name="itemimage" id="editeditemimage" class="form-control"
+                                    data-parsley-minlength="6" data-parsley-maxlength="16"
+                                    data-parsley-trigger="keyup" />
+                            </div>
+                        </div>
+                    </div>
+
+
 
                     <div class="form-group">
                         <div class="row">
@@ -383,6 +450,8 @@ require_once("../Model/item_detailsmodel.php");
                             </div>
                         </div>
                     </div>
+
+
                     <div class="form-group">
                         <div class="row">
                             <label class="col-md-4 text-right">SubCategory Description <span
@@ -395,10 +464,11 @@ require_once("../Model/item_detailsmodel.php");
                             </div>
                         </div>
                     </div>
+                
+
 
                     <div class="form-group">
                         <div class="row">
-
                             <div class="col-md-8">
                                 <input type="hidden" name="itemsubcatcreatedby" id="itemsubcatcreatedby"
                                     class="form-control" required data-parsley-type="integer"
@@ -470,7 +540,15 @@ require_once("../Model/item_detailsmodel.php");
                                     </div>
                                 </div>
 
-
+                                <div class="row">
+                                    <div class="col-4">
+                                        <label for="displayItemDescription">Description</label>
+                                    </div>
+                                    <div class="col-8">
+                                        <p class="card-title" id="displayItemDescription"></p>
+                                    </div>
+                                </div>
+                               
 
 
                             </div>
@@ -485,16 +563,18 @@ require_once("../Model/item_detailsmodel.php");
     </div>
 </div>
 <script>
-$(document).ready(function() {
-debugger;
+
+$('#editedunitFactor').on('change', function(){
+    calculateeditedTotalMPR();
+})
 
     $('#edititemdetailsModal').on('show.bs.modal', function(e) {
         var rowid = $(e.relatedTarget).data('id');
         $('#itemid').val(rowid);
-
-
+       
+        
     });
-    var uniturl = config.developmentPath +
+     var uniturl = config.developmentPath+
         "/Admin/Controller/unitsContoller.php"
     $.getJSON(uniturl, function(data) {
         loadEditedUnitFactor(data[0].unitId);
@@ -503,14 +583,14 @@ debugger;
             $('#editedunit').append('<option value="' + value.unitId + '">' + value
                 .unitName + '</option>');
         });
-
+       
     });
 
     function loadEditedUnitFactor(unitId) {
 
         $('#editedunitFactor').empty();
         unitFactorurl =
-            config.developmentPath +
+            config.developmentPath+
             "/Admin/Controller/unitFactorController.php/?unitId=" + unitId;
         $.getJSON(unitFactorurl, function(data) {
             $.each(data, function(index, value) {
@@ -523,64 +603,71 @@ debugger;
     var dataTable = $('#item_table').DataTable({});
     var nEditing = null;
     $('#item_table tbody').on('click', 'tr', function() {
-
+     
         /* Get the row as a parent of the link that was clicked on */
         $('#editeditemname').val(this.cells[0].innerHTML);
         $('#displayItemName').text(this.cells[0].innerHTML);
 
-        $('#editeditemCategory').val(this.cells[2].innerHTML);
-        $('#displayItemCategory').text(this.cells[2].innerHTML)
 
-        $('#displayItemSubCategory').text(this.cells[4].innerHTML)
-
+        $('#editeditemdescription').val(this.cells[1].innerHTML);
+        $('#displayItemDescription').text(this.cells[1].innerHTML);
 
 
-        var fetchsubcaturl = config.developmentPath +
+        $('#editeditemCategory').val(this.cells[3].innerHTML);
+        $('#displayItemCategory').text(this.cells[3].innerHTML);
+
+        $('#displayItemSubCategory').text(this.cells[5].innerHTML);
+
+      
+        $('#editedsubCategory').empty();
+
+        $('#itemImage').attr('src', config.developmentPath+
+            "/Admin/img/items/" + this.cells[6].innerHTML)
+
+        var fetchsubcaturl = config.developmentPath+
             "/Admin/Controller/item_subcategorycontroller.php/?catId=" + $(
                 '#editeditemCategory').val();
-        var subcatid = this.cells[4].innerHTML;
+                var subcatid=this.cells[5].innerHTML;
         $.getJSON(fetchsubcaturl, function(data) {
             $.each(data, function(index, value) {
                 // APPEND OR INSERT DATA TO SELECT ELEMENT.
-
-                if (value.itemsubcatid == subcatid) {
+                
+                if(value.itemsubcatid== subcatid){
                     $('#editedsubCategory').append('<option selected value="' + value
-                        .itemsubcatid +
-                        '">' + value
-                        .itemsubcatname + '</option>');
-                } else {
+                    .itemsubcatid +
+                    '">' + value
+                    .itemsubcatname + '</option>');
+                }else{
                     $('#editedsubCategory').append('<option value="' + value
-                        .itemsubcatid +
-                        '">' + value
-                        .itemsubcatname + '</option>');
+                    .itemsubcatid +
+                    '">' + value
+                    .itemsubcatname + '</option>');
                 }
-
+                
             });
         });
-
+ 
     });
-    var uniturl = config.developmentPath +
+    var uniturl = config.developmentPath+
         "/Admin/Controller/unitsContoller.php"
     $.getJSON(uniturl, function(data) {
         loadUnitFactor(data[0].unitId);
         $.each(data, function(index, value) {
-            $('#unit').append(
-                '<option hidden disabled selected value>-- select an option --</option>');
+            $('#unit').append('<option hidden disabled selected value>-- select an option --</option>');
             $('#unit').append('<option value="' + value.unitId + '">' + value
                 .unitName + '</option>');
         });
-
+       
     });
 
     function loadUnitFactor(unitId) {
         $('#unitFactor').empty();
         unitFactorurl =
-            config.developmentPath +
+            config.developmentPath+
             "/Admin/Controller/unitFactorController.php/?unitId=" + unitId;
         $.getJSON(unitFactorurl, function(data) {
             $.each(data, function(index, value) {
-                $('#unitFactor').append(
-                    '<option hidden disabled selected value>Blank</option>');
+                $('#unitFactor').append('<option hidden disabled selected value>Blank</option>');
                 $('#unitFactor').append('<option value="' + value.unitFactorId +
                     '">' + value.unitFactor + '</option>');
             });
@@ -588,11 +675,11 @@ debugger;
     }
 
     $('#editeditemdetails_form').submit(function(event) {
-        debugger;
+
         var formData = new FormData(this);
         $.ajax({
             type: "POST",
-            url: config.developmentPath +
+            url: config.developmentPath+
                 "/Admin/Controller/item_detailscontroller.php/",
             data: formData,
             processData: false,
@@ -603,11 +690,11 @@ debugger;
         $('#edititemdetailsModal').dispose();
         event.preventDefault();
     });
-    var url = config.developmentPath + "/Admin/Controller/item_categorycontroller.php";
+    var url = config.developmentPath+ "/Admin/Controller/item_categorycontroller.php";
     let isSelectedSet = false;
     let catId = 0;
     $.getJSON(url, function(data) {
-
+      
         $.each(data, function(index, value) {
             if (isSelectedSet === false) {
                 $('#itemCategory').append('<option selected value="' + value.itemcatid +
@@ -620,11 +707,9 @@ debugger;
                     .itemcatname + '</option>');
                 isSelectedSet = true;
                 setSubCategory(value.itemcatid);
-
+                
             } else {
-                $('#itemCategory').append(
-                    '<option hidden disabled selected value>-- select an option --</option>'
-                );
+                $('#itemCategory').append('<option hidden disabled selected value>-- select an option --</option>');
                 $('#itemCategory').append('<option value="' + value.itemcatid + '">' + value
                     .itemcatname + '</option>');
                 $('#editeditemCategory').append('<option value="' + value.itemcatid + '">' +
@@ -635,15 +720,14 @@ debugger;
     });
 
     function setSubCategory(catId) {
-        var fetchsubcaturl = config.developmentPath +
+        var fetchsubcaturl = config.developmentPath+
             "/Admin/Controller/item_subcategorycontroller.php/?catId=" +
             catId;
         $.getJSON(fetchsubcaturl, function(data) {
-
-            $('#subCategory').append(
-                '<option hidden disabled selected value>-- select an option --</option>');
+            
+            $('#subCategory').append('<option hidden disabled selected value>-- select an option --</option>');
             $.each(data, function(index, value) {
-
+                
                 $('#subCategory').append('<option value="' + value.itemsubcatid + '">' +
                     value
                     .itemsubcatname + '</option>');
@@ -654,17 +738,28 @@ debugger;
             });
         });
     }
+    // var fetchcompany = config.developmentPath+ "/Admin/Controller/brandcontroller.php/"
+    // $.getJSON(fetchcompany, function(data) {
+
+    //     $.each(data, function(index, value) {
+    //         $('#company').append('<option hidden disabled selected value>-- select an option --</option>');
+    //         $('#company').append('<option value="' + value.brandid + '">' + value
+    //             .brandname + '</option>');
+    //         $('#editedcompany').append('<option value="' + value.brandid + '">' + value
+    //             .brandname + '</option>');
+    //     });
+    // });
 
     $('#unit').on('change', function() {
         $('#unitFactor').empty();
         unitFactorurl =
-            config.developmentPath +
+            config.developmentPath+
             "/Admin/Controller/unitFactorController.php/?unitId=" + this
             .value;
         $.getJSON(unitFactorurl, function(data) {
-
+            
             $.each(data, function(index, value) {
-
+                
                 $('#unitFactor').append('<option value="' + value.unitFactorId +
                     '">' +
                     value
@@ -675,7 +770,7 @@ debugger;
     $('#editedunit').on('change', function() {
         $('#editedunitFactor').empty();
         unitFactorurl =
-            config.developmentPath +
+            config.developmentPath+
             "/Admin/Controller/unitFactorController.php/?unitId=" + this
             .value;
         $.getJSON(unitFactorurl, function(data) {
@@ -691,10 +786,10 @@ debugger;
     $('#itemCategory').on('change', function() {
         $('#subCategory').empty();
         fetchsubcaturl =
-            config.developmentPath +
+            config.developmentPath+
             "/Admin/Controller/item_subcategorycontroller.php/?catId=" + this
             .value;
-
+            
         $.getJSON(fetchsubcaturl, function(data) {
             $.each(data, function(index, value) {
                 // APPEND OR INSERT DATA TO SELECT ELEMENT.
@@ -708,10 +803,10 @@ debugger;
     $('#editeditemCategory').on('change', function() {
         $('#editedsubCategory').empty();
         fetchsubcaturl =
-            config.developmentPath +
-            "/Admin/Controller/item_subcategorycontroller.php/?catId=" + this
+            config.developmentPath+
+           "/Admin/Controller/item_subcategorycontroller.php/?catId=" + this
             .value;
-
+            
         $.getJSON(fetchsubcaturl, function(data) {
             $.each(data, function(index, value) {
                 // APPEND OR INSERT DATA TO SELECT ELEMENT.
@@ -742,7 +837,7 @@ debugger;
     });
     $('#deletebutton').click(function() {
         $.ajax({
-            url: config.developmentPath + "/Admin/Controller/item_detailscontroller.php/",
+            url:  config.developmentPath+"/Admin/Controller/item_detailscontroller.php/",
             method: "POST",
             data: {
                 id: $('#deleteitemid').val(),
@@ -762,7 +857,7 @@ debugger;
         var formData = new FormData(this);
         $.ajax({
             type: "POST",
-            url: config.developmentPath +
+            url: config.developmentPath+
                 "/Admin/Controller/item_categorycontroller.php/",
             data: formData,
             processData: false,
@@ -777,7 +872,7 @@ debugger;
         var formData = new FormData(this);
         $.ajax({
             type: "POST",
-            url: config.developmentPath +
+            url: config.developmentPath+
                 "/Admin/Controller/item_subcategorycontroller.php/",
             data: formData,
             processData: false,
@@ -788,7 +883,7 @@ debugger;
         reloadSubCategoryList();
         $('#itemsubcatModal').hide();
     });
-
+   
     function reloadCategoryList() {
         $('#itemCategory').empty();
         $.getJSON(url, function(data) {
@@ -803,7 +898,7 @@ debugger;
 
     function reloadSubCategoryList() {
         var selectedCategory = $('#itemCategory').val();
-        fetchcompany = config.developmentPath +
+        fetchcompany = config.developmentPath+
             "/Admin/Controller/item_compdetailscontroller.php/?catId=" + selectedCategory;
 
         $('#subCategory').empty();
@@ -818,5 +913,6 @@ debugger;
     }
 
 
-});
+
+
 </script>

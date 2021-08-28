@@ -96,18 +96,19 @@ require_once("../Model/item_categorymodel.php");
                             </div>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <div class="row">
-                            <label class="col-md-4 text-right">Category Description <span
+                            <label class="col-md-4 text-right">Category Description<span
                                     class="text-danger">*</span></label>
                             <div class="col-md-8">
-                                <input type="text" name="itemcatdescription" id="itemcatdescription"
-                                    class="form-control" required data-parsley-type="integer"
-                                    data-parsley-minlength="10" data-parsley-maxlength="12"
-                                    data-parsley-trigger="keyup" />
+                                <textarea  name="itemcatdescription" id="itemcatdescription" class="form-control"
+                                    required ></textarea>
                             </div>
                         </div>
                     </div>
+
+
 
                     <div class="form-group">
                         <div class="row">
@@ -164,18 +165,21 @@ require_once("../Model/item_categorymodel.php");
                             </div>
                         </div>
                     </div>
+                    
+
+
                     <div class="form-group">
                         <div class="row">
-                            <label class="col-md-4 text-right">Category Description <span
+                            <label class="col-md-4 text-right">Category Description<span
                                     class="text-danger">*</span></label>
                             <div class="col-md-8">
-                                <input type="text" name="itemcatdescription" id="editedItemcatdescription"
-                                    class="form-control" required data-parsley-type="integer"
-                                    data-parsley-minlength="10" data-parsley-maxlength="12"
-                                    data-parsley-trigger="keyup" />
+                                <textarea  name="editedItemcatdescription" id="editedItemcatdescription" class="form-control"
+                                    required ></textarea>
                             </div>
                         </div>
                     </div>
+
+
 
                     <div class="form-group">
                         <div class="row">

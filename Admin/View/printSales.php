@@ -58,7 +58,7 @@ $firstsales = DBsales::getSalesForPrint($salesId);
                 </tr>
                 <tr>
                     <td>Sales Id&nbsp: &nbsp <?php echo $firstsales->getSOCode() ?>
-                        <p id=" " style="display: none;"> <?php echo $firstsales->getSOCode() ?></p>
+                        <p id="salescode" style="display: none;"> <?php echo $firstsales->getSOCode() ?></p>
                     </td>
                 </tr>
                 <tr>
@@ -231,7 +231,7 @@ require_once "footer.php";
         $('#itemListForm').submit(function(e) {
             debugger;
             var content = $('#printsales').html();
-            var fileName = $('#salescode').text() + $('#listquoteCode').text() + '_SO';
+            var fileName = $('#salescode').text() + $('#listquoteCode').text();
             var uniturl = config.developmentPath + "/Admin/Controller/pdfGeneratorContorller.php";
             $.ajax({
                 type: "POST",

@@ -3,6 +3,7 @@ require "../Model/unitFactorModel.php";
 require "../Utilities/Sanitization.php";
 include "../DB Operations/unitFactorOps.php";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  
   if (isset($_POST['unitFactorId'])) {
     $unitFactor = new unitFactor();
     $unitFactor->set_unitFactorId(Sanitization::test_input($_POST["unitFactorId"]));

@@ -69,11 +69,11 @@ class Payment  implements JsonSerializable
         return $this->total_amount;
     }
 
-    function set_paidamt($paidamt)
+    function set_paidAmt($paidamt)
     {
         $this->paid_amount= $paidamt;
     }
-    function get_paidamt()
+    function get_paidAmt()
     {
         return $this->paid_amount;
     }

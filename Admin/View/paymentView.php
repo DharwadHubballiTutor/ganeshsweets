@@ -234,7 +234,7 @@ if ($_SERVER["REQUEST_METHOD"]=="GET") {
                                             <div class="col-sm-12">
                                                 <input type="text" name="paidamt" id="paidamt" class="form-control"
                                                     data-parsley-trigger="keyup"
-                                                    value="<?php if($saleOrder!=null) { echo  $paymentInfo->get_paidAmt();  } ?>" readonly />
+                                                    value="<?php if($saleOrder!=null) { echo  $saleOrder->get_paidAmt();  } ?>" readonly />
                                             </div>
                                         </div>
                                         <br />
@@ -255,7 +255,7 @@ if ($_SERVER["REQUEST_METHOD"]=="GET") {
                                             <div class="col-sm-12">
                                                 <input type="text" name="pendingamt" id="pendingamt"
                                                     class="form-control" required data-parsley-trigger="keyup"
-                                                    value="<?php if($saleOrder!=null) { echo  $paymentInfo->get_pendingAmt(); } ?>" readonly />
+                                                    value="<?php if($saleOrder!=null) { echo  $saleOrder->get_pendingAmt(); } ?>" readonly />
                                             </div>
                                         </div>
                                         <br />

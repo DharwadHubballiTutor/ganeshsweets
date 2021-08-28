@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $unit->set_unitId(Sanitization::test_input($_POST["unitId"]));
     DBunit::update($unit);
   } else if ($_POST["action"] == 'delete') {
-    DBitemcategory::delete($_POST["id"]);
+    DBunit::delete($_POST["id"]);
   } else {
     $unit = new unit();
     $unit->set_unitName(Sanitization::test_input($_POST["unitName"]));

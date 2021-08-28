@@ -54,12 +54,12 @@ require_once("../Model/unitFactorModel.php");
                             <button class='btn btn-primary dropdown-item'
                             data-toggle='modal' data-target='#editUnitFactorModal' role='button' data-id='" . $unitFactor->get_unitFactorId() . "'> 
                             <i class='fas fa-user-edit'></i>
-                                Edit Units
+                                Edit Unit Factor
                            </button>
                            <button class='btn btn-primary dropdown-item'
-                           data-toggle='modal' data-target='#deleteSubCategoryModal' name='delete_button' role='button' data-id='" . $unitFactor->get_unitFactorId() . "'>
+                           data-toggle='modal' data-target='#deleteUnitFactor' name='delete_button' role='button' data-id='" . $unitFactor->get_unitFactorId() . "'>
                             <i class='fas fa-trash-alt'></i>
-                              Delete Supplier
+                              Delete Unit Factor
                           </button>
                         </div>
                     </div>
@@ -202,19 +202,19 @@ require_once("../Model/unitFactorModel.php");
         </form>
     </div>
 </div>
-<div class="modal fade" id=deleteSubCategoryModal tabindex=-1 role=dialog aria-hidden=true>
+<div class="modal fade" id=deleteUnitFactor tabindex=-1 role=dialog aria-hidden=true>
     <div class="modal-dialog">
         <form method="POST" id="delete_subcategory_form" enctype="multipart/form-data">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="modal_title">Delete Sub Category</h4>
+                    <h4 class="modal-title" id="modal_title">Delete Unit Factor</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <p class="lead">
-                        Are you sure. Would you like to delete this Subcategory record.
+                        Are you sure. Would you like to delete this Unit Factor record.
                     </p>
-                    <input type="hidden" name="itemsubcatid" id="itemsubcatid" value="">
+                    <input type="hidden" name="unitFactorId" id="unitFactorId" value="">
                 </div>
                 <div class="modal-footer">
                     <input type="hidden" name="hidden_id" id="hidden_id" />
@@ -273,7 +273,7 @@ require_once("../Model/unitFactorModel.php");
                     .unitName + '</option>');
             });
         });
-        $('#deleteSubCategoryModal').on('show.bs.modal', function(e) {
+        $('#deleteUnitFactor').on('show.bs.modal', function(e) {
 
             var rowid = $(e.relatedTarget).data('id');
             $('#unitFactorId').val(rowid);
@@ -284,7 +284,7 @@ require_once("../Model/unitFactorModel.php");
                 url:  config.developmentPath+"/Admin/Controller/unitFactorController.php/",
                 method: "POST",
                 data: {
-                    id: $('#itemsubcatid').val(),
+                    id: $('#unitFactorId').val(),
                     action: 'delete'
                 },
                 success: function(data) {

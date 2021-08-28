@@ -111,18 +111,18 @@ require_once("../Model/item_subcategorymodel.php");
                             </div>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <div class="row">
-                            <label class="col-md-4 text-right">SubCategory Description <span
+                            <label class="col-md-4 text-right">SubCategory Description<span
                                     class="text-danger">*</span></label>
                             <div class="col-md-8">
-                                <input type="text" name="itemsubcatdescription" id="itemsubcatdescription"
-                                    class="form-control" required data-parsley-type="integer"
-                                    data-parsley-minlength="10" data-parsley-maxlength="12"
-                                    data-parsley-trigger="keyup" />
+                                <textarea  name="itemsubcatdescription" id="itemsubcatdescription" class="form-control"
+                                    required ></textarea>
                             </div>
                         </div>
                     </div>
+
 
                     <div class="form-group">
                         <div class="row">
@@ -184,7 +184,6 @@ require_once("../Model/item_subcategorymodel.php");
                             <label class="col-md-4 text-right">SubCategory Name <span
                                     class="text-danger">*</span></label>
                             <div class="col-md-8">
-                                
                                 <input type="text" name="itemsubcatname" id="editeditemsubcatname" class="form-control"
                                     required data-parsley-pattern="/^[a-zA-Z\s]+$/" data-parsley-maxlength="150"
                                     data-parsley-trigger="keyup" />
@@ -192,18 +191,19 @@ require_once("../Model/item_subcategorymodel.php");
                             </div>
                         </div>
                     </div>
+
+
                     <div class="form-group">
                         <div class="row">
-                            <label class="col-md-4 text-right">SubCategory Description <span
+                            <label class="col-md-4 text-right">SubCategory Description<span
                                     class="text-danger">*</span></label>
                             <div class="col-md-8">
-                                <input type="text" name="itemsubcatdescription" id="editeditemsubcatdescription"
-                                    class="form-control" required data-parsley-type="integer"
-                                    data-parsley-minlength="10" data-parsley-maxlength="12"
-                                    data-parsley-trigger="keyup" />
+                                <textarea  name="editeditemsubcatdescription" id="editeditemsubcatdescription" class="form-control"
+                                    required ></textarea>
                             </div>
                         </div>
                     </div>
+
 
                     <div class="form-group">
                         <div class="row">

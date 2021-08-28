@@ -63,11 +63,11 @@
                 <i class="fas fa-truck-loading"></i>
                     <span>Products</span></a>
             </li> -->
-            <li class="nav-item">
+           <!-- <li class="nav-item">
                 <a class="nav-link" href="itemstocks.php">
                     <i class="fas fa-percent"></i>
                     <span>Item Stock</span></a>
-            </li>
+            </li>-->
             <li class="nav-item">
                 <a class="nav-link" href="enquiry.php">
                 <i class="fas fa-backward"></i>
