@@ -160,27 +160,23 @@ class DBsales
      customerContactNumber,
      customerCode,
      salesid";
-    error_log($sql);
     $result = $connectionObj->query($sql);
     $count = mysqli_num_rows($result);
-    error_log($sql);
     $sales = new salesOrder();
     if ($count > 0) {
       while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
-     
         $sales->set_Id($row["Id"]);
         $sales->setSOcode($row["SOcode"]);
         $sales->setCustomerName($row["CustomerName"]);
         $sales->setCustomerContactNumber($row["customerContactNumber"]);
         $sales->setCustomerAddress($row["customerAddress"]);
-     
         $sales->set_salesdate(date('Y-m-d',strtotime($row["SalesDate"])));
         $sales->set_totalAmount($row["TotalAmt"]);
-        
-
         $sales->setCustomerCode($row["customerCode"]);
     
       }
+    }else{
+      $sales=null;
     }
     return $sales;
   }

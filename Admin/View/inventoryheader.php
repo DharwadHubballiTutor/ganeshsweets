@@ -69,12 +69,12 @@
                     <span>Item Stock</span></a>
             </li>-->
             <li class="nav-item">
-                <a class="nav-link" href="enquiry.php">
+                <a class="nav-link" href="SOview.php">
                 <i class="fas fa-backward"></i>
                 <span>Back</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="enquiry.php">
+                <a class="nav-link" href="SOview.php">
                     <i class="fas fa-home"></i>
                     <span>Home</span></a>
             </li>

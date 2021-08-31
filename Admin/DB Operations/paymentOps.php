@@ -30,18 +30,15 @@ public static function getPaymentInfoBySalesOrderId($SalesOrderId){
   $connectionObj = $db->getConnection();
   $sql = "SELECT
   P.SOID AS Id,
-
   P.paid_amount AS PaidAmt ,
   p.pending_amount AS PendingAmount,
   P.payment_mode AS paymentmode,
   P.received_amount AS  ReceivedAmt,
   P.pdfName AS pdfname,
-  P.total_amount AS TotalAmount
+  P.total_amount AS TotalAmount,
+  P.modifieddate AS modifieddate
   from PaymentInfo AS P
-  
-  
   where P.SOID=".$SalesOrderId;
-  error_log($sql);
   $result = $connectionObj->query($sql);
   $count = mysqli_num_rows($result);
   $PaymentList = [];
@@ -58,6 +55,7 @@ public static function getPaymentInfoBySalesOrderId($SalesOrderId){
           $Payment->set_receivedamt($row['ReceivedAmt']);
           $Payment->set_paymentmode($row['paymentmode']);
           $Payment->setpdfName($row['pdfname']);
+          $Payment->setModifiedDate(date('d-m-Y',strtotime($row['modifieddate'])));
           array_push($PaymentList, $Payment);
       }
   } else {

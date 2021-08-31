@@ -50,10 +50,7 @@ include "../DB Operations/item_detailsOps.php";
   
 }
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-
   $catId=Sanitization::test_input($_GET['catId']);
   $subcatId=Sanitization::test_input($_GET['subcatId']);
-  error_log( $catId.$subcatId);
   DBitemdetails::selectitem($catId,$subcatId);
-  error_log("");
 }

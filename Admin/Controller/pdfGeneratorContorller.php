@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     else if ($fileType=='payments')
     {
         $payment= new payment();
-        $payment->set_paymentid($_POST['salesOrderNumber']);
+        $payment->set_paymentid($_POST['salesId']);
         $payment->setPdfName($fileName.'.pdf');
         DBpayment::updateFileName($payment);
     }

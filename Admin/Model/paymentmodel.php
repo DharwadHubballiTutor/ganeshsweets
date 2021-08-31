@@ -18,24 +18,21 @@ class Payment  implements JsonSerializable
     private $RTGS_no;
     private $payment_receipt;
     private $modified_by;
+    private $modifiedDate;
     private $pdfName;
     private $table_name = "paymentinfo";
 
     function set_SOID($SOID)
     {
-        $this->SOID= $SOID;
+        $this->SOID = $SOID;
     }
     function get_SOID()
     {
         return $this->SOID;
     }
-
-
-
-
     function set_custid($custid)
     {
-        $this->customer_id= $custid;
+        $this->customer_id = $custid;
     }
     function get_custid()
     {
@@ -44,7 +41,7 @@ class Payment  implements JsonSerializable
 
     function set_custname($custname)
     {
-        $this->customer_name= $custname;
+        $this->customer_name = $custname;
     }
     function get_custname()
     {
@@ -53,7 +50,7 @@ class Payment  implements JsonSerializable
 
     function set_custcontactnumber($custcontactnumber)
     {
-        $this->customer_contactnumber= $custcontactnumber;
+        $this->customer_contactnumber = $custcontactnumber;
     }
     function get_custcontactnumber()
     {
@@ -62,7 +59,7 @@ class Payment  implements JsonSerializable
 
     function set_totalamt($totalamt)
     {
-        $this->total_amount= $totalamt;
+        $this->total_amount = $totalamt;
     }
     function get_totalamt()
     {
@@ -71,7 +68,7 @@ class Payment  implements JsonSerializable
 
     function set_paidAmt($paidamt)
     {
-        $this->paid_amount= $paidamt;
+        $this->paid_amount = $paidamt;
     }
     function get_paidAmt()
     {
@@ -81,7 +78,7 @@ class Payment  implements JsonSerializable
 
     function set_receivedamt($receivedamt)
     {
-        $this->received_amount= $receivedamt;
+        $this->received_amount = $receivedamt;
     }
     function get_receivedamt()
     {
@@ -91,7 +88,7 @@ class Payment  implements JsonSerializable
 
     function set_pendingamt($pendingamt)
     {
-        $this->pending_amount= $pendingamt;
+        $this->pending_amount = $pendingamt;
     }
     function get_pendingamt()
     {
@@ -100,7 +97,7 @@ class Payment  implements JsonSerializable
 
     function set_paymentmode($paymentmode)
     {
-        $this->payment_mode= $paymentmode;
+        $this->payment_mode = $paymentmode;
     }
     function get_paymentmode()
     {
@@ -109,7 +106,7 @@ class Payment  implements JsonSerializable
 
     function set_paymentdescription($paymentdescription)
     {
-        $this->payment_description= $paymentdescription;
+        $this->payment_description = $paymentdescription;
     }
     function get_paymentdescription()
     {
@@ -118,7 +115,7 @@ class Payment  implements JsonSerializable
 
     function set_paymentid($paymentid)
     {
-        $this->payment_id= $paymentid;
+        $this->payment_id = $paymentid;
     }
     function get_paymentid()
     {
@@ -127,7 +124,7 @@ class Payment  implements JsonSerializable
 
     function set_paymentplan($paymentplan)
     {
-        $this->payment_plan= $paymentplan;
+        $this->payment_plan = $paymentplan;
     }
     function get_paymentplan()
     {
@@ -136,7 +133,7 @@ class Payment  implements JsonSerializable
 
     function set_duedate($duedate)
     {
-        $this->due_date= $duedate;
+        $this->due_date = $duedate;
     }
     function get_duedate()
     {
@@ -145,7 +142,7 @@ class Payment  implements JsonSerializable
 
     function set_chequeimg($chequeimg)
     {
-        $this->cheque_img= $chequeimg;
+        $this->cheque_img = $chequeimg;
     }
     function get_chequeimg()
     {
@@ -154,7 +151,7 @@ class Payment  implements JsonSerializable
 
     function set_paymentreceipt($paymentreceipt)
     {
-        $this->payment_receipt= $paymentreceipt;
+        $this->payment_receipt = $paymentreceipt;
     }
     function get_paymentreceipt()
     {
@@ -163,7 +160,7 @@ class Payment  implements JsonSerializable
 
     function set_RTGSno($RTGSno)
     {
-        $this->RTGS_no= $RTGSno;
+        $this->RTGS_no = $RTGSno;
     }
     function get_RTGSno()
     {
@@ -172,7 +169,7 @@ class Payment  implements JsonSerializable
 
     function set_modifiedby($modifiedby)
     {
-        $this->modified_by= $modifiedby;
+        $this->modified_by = $modifiedby;
     }
     function get_modifiedby()
     {
@@ -183,32 +180,32 @@ class Payment  implements JsonSerializable
     public function jsonSerialize()
     {
         return [
-            
-                'paymentid' => $this->payment_id,
-                'custid' =>$this->customer_id,
-                'custname' => $this->customer_name,
-                'custcontactnumber' =>$this->customer_contactnumber,
-                'totalamt' =>$this->total_amount,
-                'paidamt' =>$this->paid_amount,
-                'pendingamt' =>$this->pending_amount,
-                'paymentplan' =>$this->payment_plan,
-                'paymentmode' =>$this->payment_mode,
-                'RTGSno'=>$this->RTGS_no,
-                'chequeimg'=>$this->cheque_img,
-                'duedate'=>$this->due_date,
-                'paymentdescription' =>$this->payment_description,
-                'pdfName' =>$this->pdfName,
 
-                'paymentreceipt' =>$this->payment_receipt,
+            'paymentid' => $this->payment_id,
+            'custid' => $this->customer_id,
+            'custname' => $this->customer_name,
+            'custcontactnumber' => $this->customer_contactnumber,
+            'totalamt' => $this->total_amount,
+            'paidamt' => $this->paid_amount,
+            'pendingamt' => $this->pending_amount,
+            'paymentplan' => $this->payment_plan,
+            'paymentmode' => $this->payment_mode,
+            'RTGSno' => $this->RTGS_no,
+            'chequeimg' => $this->cheque_img,
+            'duedate' => $this->due_date,
+            'paymentdescription' => $this->payment_description,
+            'pdfName' => $this->pdfName,
+
+            'paymentreceipt' => $this->payment_receipt,
 
 
-            
+
         ];
     }
 
     /**
      * Get the value of pdfName
-     */ 
+     */
     public function getPdfName()
     {
         return $this->pdfName;
@@ -218,10 +215,28 @@ class Payment  implements JsonSerializable
      * Set the value of pdfName
      *
      * @return  self
-     */ 
+     */
     public function setPdfName($pdfName)
     {
         $this->pdfName = $pdfName;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of modifiedDate
+     */
+    public function getModifiedDate()
+    {
+        return $this->modifiedDate;
+    }
+
+    /**
+     * Set the value of modifiedDate
+     */
+    public function setModifiedDate($modifiedDate): self
+    {
+        $this->modifiedDate = $modifiedDate;
 
         return $this;
     }

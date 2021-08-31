@@ -213,6 +213,8 @@ include "footer.php";
 
         $('#createQuote').click(function() {
             var formData = $('#saleOrder_form').serializeJSON();
+            $('#totalOrderAmount').val(parseFloat(formData['totalAmount']) + parseFloat($('#totalOrderAmount').val()));
+            formData.totalOrderAmount=$('#totalOrderAmount').val();
             sales.push(formData);
             console.log(sales);
             if (formData['itemquantity'] != "" && formData['itemquantity'] != "0") {
@@ -243,7 +245,6 @@ include "footer.php";
                     '<div class="btn-group" role="group" aria-label="Basic mixed styles example"><a class="btn btn-success" onclick="removeItem(' + formData['itemid'] + ')" href="#" role="button"><i class="far fa-trash-alt"></i></a>'
                     +'<a onclick="editItem(' + formData['itemid'] + ')" id="edit_'+formData['itemid']+'"class="btn btn-warning btn-small" href="#" role="button"><i class="fas fa-pencil-alt"></i></a>'
                     +'<a onclick="saveItem(' + formData['itemid'] + ')" id="save_'+formData['itemid']+'"class="btn btn-primary btn-small disabled" href="#" role="button" ><i class="fas fa-sd-card"></i></a></div>'));
-                $('#totalOrderAmount').val(parseFloat(formData['totalAmount']) + parseFloat($('#totalOrderAmount').val()));
                 $('#Quote').removeClass('disabled');
             } else {
                 alert("Please add the appropriate values in the Quantity")

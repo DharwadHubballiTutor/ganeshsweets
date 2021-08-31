@@ -1,12 +1,11 @@
 <?php
-
 require_once "../Model/salesorderModel.php";
 require_once "../Utilities/Sanitization.php";
-include_once "../DB Operations/salesorderOps.php";
-include_once  "../DB Operations/customerOps.php ";
+require_once "../DB Operations/salesorderOps.php";
+require_once  "../DB Operations/customerOps.php ";
 require_once "../Model/SOlineitemModel.php";
-include_once "../DB Operations/SOlineitemOps.php ";
-include_once  "../DB Operations/paymentOps.php ";
+require_once  "../DB Operations/SOlineitemOps.php ";
+require_once  "../DB Operations/paymentOps.php ";
 require_once "../Model/paymentmodel.php";
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -17,7 +16,6 @@ require_once "../Model/paymentmodel.php";
           $sales->set_customer(Sanitization::test_input($value[0]["customer"]));
           $sales->set_itemid(Sanitization::test_input($value[0]["itemid"]));
           $sales->set_totalAmount(Sanitization::test_input($value[0]["totalAmount"]));
-        
           $sales->set_itemquantity(Sanitization::test_input($value[0]["itemquantity"]));
           $sales->set_itemperpieceprice(Sanitization::test_input($value[0]["itemperpieceprice"]));
           $sales->set_salesdate(Sanitization::test_input($value[0]["salesdate"]));
@@ -31,13 +29,11 @@ require_once "../Model/paymentmodel.php";
           $salesCode='GS-'.substr((str_replace('-', '', $sales->get_salesdate())), 0, 6).'-'.$acronym.'-SO';
           $sales->setSOcode($salesCode);
           $salesId=DBsales::insert($sales);
-          error_log( $salesId);
           $payment= new Payment();
           $payment->set_SOID($salesId);
-            
             $payment->set_custid(Sanitization::test_input($value [0] ["customer"])); 
-            $payment->set_totalamt(Sanitization::test_input($value [0]["totalAmount"]));
-            $payment->set_pendingamt(Sanitization::test_input($value [0]["totalAmount"]));
+            $payment->set_totalamt(Sanitization::test_input($value [count($value)-1]["totalOrderAmount"]));
+            $payment->set_pendingamt(Sanitization::test_input($value [count($value)-1]["totalOrderAmount"]));
             $payment->set_modifiedby(Sanitization::test_input($value[0]["modifiedby"]));
             $payment->set_receivedamt(0);
             $payment->set_paymentplan(0);
@@ -55,6 +51,7 @@ require_once "../Model/paymentmodel.php";
               $saleslineitem->set_price(Sanitization::test_input($value["itemperpieceprice"]));
               DBSOLineItem::insert($saleslineitem);
           }
+         
       } elseif (isset($_POST['id'])) {
           $sales=new salesOrder();
           $sales->set_customer(Sanitization::test_input($_POST["customer"]));
@@ -69,9 +66,4 @@ require_once "../Model/paymentmodel.php";
       }
     header("location:../Admin/View/SOview.php");  
   }
-  if ($_SERVER["REQUEST_METHOD"]=="GET") {
- 
-    
-        }
-?>
-
+  
