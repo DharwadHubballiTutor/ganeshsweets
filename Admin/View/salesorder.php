@@ -1,4 +1,5 @@
 <?php
+require_once("session.php");
 include "salesorderheader.php";
 require_once("../DB Operations/salesorderOps.php");
 require_once("../Model/salesorderModel.php");
@@ -116,7 +117,7 @@ require_once("../Model/salesorderModel.php");
                             <div class="row ">
 
                                 <div class="col-md-8">
-                                    <input type="hidden" name="modifiedby" id="modifiedby" class="form-control" required data-parsley-type="integer" data-parsley-minlength="10" data-parsley-maxlength="12" data-parsley-trigger="keyup" value="<?php echo $_SESSION['login_user']; ?>" />
+                                    <input type="hidden" name="modifiedby" id="modifiedby" class="form-control" required value="<?php echo $_SESSION['login_user']; ?>" />
                                 </div>
                             </div>
                             <div class="modal-footer">
@@ -141,12 +142,13 @@ include "footer.php";
     var sales = [];
 
     function removeItem(itemId) {
+       
         document.getElementById(itemId).remove();
         sales.forEach(function(item, index, arr) {
             if (item.itemid == itemId) {
                 document.getElementById('totalOrderAmount').value = parseFloat(document.getElementById('totalOrderAmount').value) - parseFloat(item.totalAmount);
                 sales.splice(index, 1);
-
+                sales[sales.length-1].totalOrderAmount=document.getElementById('totalOrderAmount').value;
             }
         })
     }
@@ -213,10 +215,16 @@ include "footer.php";
 
         $('#createQuote').click(function() {
             var formData = $('#saleOrder_form').serializeJSON();
-            $('#totalOrderAmount').val(parseFloat(formData['totalAmount']) + parseFloat($('#totalOrderAmount').val()));
-            formData.totalOrderAmount=$('#totalOrderAmount').val();
+           
+            let obj=sales.find(obj => obj.itemid == formData['itemid']);
+            if(obj){
+                alert("Item is already added in the list");
+                console.log(sales);
+            }else{
             sales.push(formData);
             console.log(sales);
+            $('#totalOrderAmount').val(parseFloat(formData['totalAmount']) + parseFloat($('#totalOrderAmount').val()));
+            formData.totalOrderAmount=$('#totalOrderAmount').val();
             if (formData['itemquantity'] != "" && formData['itemquantity'] != "0") {
                 $('#lineItemTable tbody').
                 append($(document.createElement('tr')).prop({
@@ -249,6 +257,7 @@ include "footer.php";
             } else {
                 alert("Please add the appropriate values in the Quantity")
             }
+        }
         });
         $('#itemquantity').on('change', function(e) {
             $('#totalAmount').val(this.value * $('#itemperpieceprice').val());

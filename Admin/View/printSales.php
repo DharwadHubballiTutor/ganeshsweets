@@ -2,6 +2,7 @@
 require_once "salesorderheader.php";
 include('../DB Operations/salesorderOps.php');
 include('../DB Operations/SOlineItemOps.php');
+require_once("session.php");
 $salesId = $_GET['id'];
 $firstsales = DBsales::getSalesForPrint($salesId);
 ?>
@@ -41,7 +42,7 @@ $firstsales = DBsales::getSalesForPrint($salesId);
         <div class='container-fluid' id="printsales">
             <table class="table table-bordered border-dark border-4" id="GeneralQuote">
                 <tr>
-                    <td style="text-align:center" colspan="6">
+                    <td style="text-align:center" colspan="7">
                         <h1>Sales Order</h1>
                         <p>Ganesh Sweets Dharwad</p>
                     </td>
@@ -67,8 +68,9 @@ $firstsales = DBsales::getSalesForPrint($salesId);
                 <tr>
                     <th style="text-align:center" colspan="1">Sl</th>
                     <th colspan="3" style="text-align:center">Description</th>
-                    <th style="text-align:center">Qty</th>
+                    <th style="text-align:center">Rate/Per Unit</th>
 
+                    <th style="text-align:center">Qty</th>
 
                     <th style="text-align:center">Amount</th>
                 </tr>
@@ -79,12 +81,12 @@ $firstsales = DBsales::getSalesForPrint($salesId);
                 $saleslist = DBSOLineItem::getLineItemBySalesIdForOrder($salesId);
                 foreach ($saleslist as $sales) {
                     echo '<tr  id="' . $count . '">
-            <td  style="text-align:center">' . $count . '<button type="button" onclick="callMe(' . $count . ')" class="btn btn-secondary btn-sm">Remove</button></td>
-            <td colspan="3">' . $sales->getName() . '</td>
-            <td  style="text-align:center">' . $sales->get_quantity() . " " . $sales->getunitName() . '</td>
-           
-            <td  style="text-align:center"id="sales-' . $count . '">' . $sales->get_totalamt() . '</td>
-        </tr>';
+                            <td  style="text-align:center">' . $count . '<button type="button" onclick="callMe(' . $count . ')" class="btn btn-secondary btn-sm">Remove</button></td>
+                            <td colspan="3">' . $sales->getName() . '</td>
+                            <td  style="text-align:center">' . $sales->get_price() . "/ " . $sales->getunitName() . '</td>
+                            <td  style="text-align:center">' . $sales->get_quantity() . " " . $sales->getunitName() . '</td>
+                            <td  style="text-align:center"id="sales-' . $count . '">' . $sales->get_totalamt() . '</td>
+                        </tr>';
                     $sum = $sum + floatval($sales->get_totalamt());
                     $sumquantity = $sumquantity + floatval($sales->get_quantity());
 
@@ -205,8 +207,6 @@ require_once "footer.php";
             placerId: "PIinwords",
             case: "ucfirst"
         });
-
-
         $('#flexSwitchCheckDefault').on('click', function(e) {
             if ($(this).attr('checked') != 'checked') {
                 $(this).attr('checked', 'checked');
@@ -252,6 +252,6 @@ require_once "footer.php";
 
             window.open(config.developmentPath + '/Admin/pdfs/salesorder/' + fileName.trim() + '.pdf');
         });
-        
+
     });
 </script>
