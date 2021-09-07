@@ -1,4 +1,5 @@
 <?php
+require_once("session.php");
 require_once "customerNavigation.php";
 include('../DB Operations/quotationOps.php');
 $customerId=$_GET['id'];

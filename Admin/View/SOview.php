@@ -1,4 +1,5 @@
 <?php
+require_once("session.php");
 include "salesorderheader.php";
 require_once("../DB Operations/salesorderOps.php");
 require_once("../Model/salesorderModel.php");

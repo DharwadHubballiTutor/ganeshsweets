@@ -1,4 +1,5 @@
 <?php
+require_once("session.php");
 include('unitheader.php');
 require_once("../DB Operations/unitOps.php");
 require_once("../Model/unitsModel.php");

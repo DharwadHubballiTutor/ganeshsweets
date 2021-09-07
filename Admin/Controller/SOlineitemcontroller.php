@@ -13,6 +13,7 @@ if ($_SERVER["REQUEST_METHOD"]=="POST") {
         DBSOLineItem::update($SaleslineItem);
     } elseif (isset($_POST["action"]) && $_POST["action"] == 'delete') {
         DBSOLineItem::delete($_POST["id"]);
+        error_log($_POST["id"]);
     } else {
         $SaleslineItem=new SaleslineItem();
         $SaleslineItem->set_itemid($_POST['additemid']);

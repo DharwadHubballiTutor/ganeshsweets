@@ -185,4 +185,5 @@ class SaleslineItem implements JsonSerializable
 
         return $this;
     }
+    
 }

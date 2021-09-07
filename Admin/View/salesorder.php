@@ -75,7 +75,7 @@ require_once("../Model/salesorderModel.php");
                             <div class="form-group">
                                 <div class="row">
                                     <label class="col-md-3 text-right">Date of Sales <span class="text-danger">*</span></label>
-                                    <div class="col-md-3">
+                                    <div class="col-md-3" required>
                                         <input type="date" class="form-control" id="salesdate" name="salesdate" value="">
                                     </div>
                                     <label class="col-md-3 text-right">Total Amount <span class="text-danger">*</span></label>

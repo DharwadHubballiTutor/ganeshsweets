@@ -11,9 +11,10 @@ require_once("../DB Operations/userOps.php");
         $loginModel->set_userpassword($mypassword);
         $user=DBuser::checkUser($loginModel);
       // If result matched $myusername and $mypassword, table row must be 1 row
-      if($user != 0 && $user->get_userstatus()=='Enable') {
+      if($user != NULL && $user->get_userstatus()=='Enable') {
          // echo "Validateed successfully";
          session_start();
+         error_log($user->get_username());
          $_SESSION['login_user'] = $user->get_username();
          $_SESSION['User_type']= $user->get_usertype();
          header("location: ../View/SOview.php");

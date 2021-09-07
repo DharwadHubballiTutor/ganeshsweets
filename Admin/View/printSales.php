@@ -1,4 +1,5 @@
 <?php
+require_once("session.php");
 require_once "salesorderheader.php";
 include('../DB Operations/salesorderOps.php');
 include('../DB Operations/SOlineItemOps.php');
@@ -95,24 +96,49 @@ $firstsales = DBsales::getSalesForPrint($salesId);
                 echo "<input type='hidden' id='totalRow' value='" . --$count . "'/>";
                 ?>
                 <tr>
-                    <td style="text-align:right" rowspan="" colspan="3">
+                    <td style="text-align:left" rowspan="2" colspan="4">
                         Returns
                     </td>
+                    
                     <td style="text-align:right">Total</td>
                     <td style="text-align:center"></td>
+
                     <td id="totalAmount" style="text-align:center">
                         <?php echo $sum ?>
                     </td>
 
                 </tr>
-
+                
                 <tr>
-                    <td colspan="6">
+                    <!-- <td colspan="6">
                         <h3 id="inwords"></h3>
-                    </td>
+                    </td> -->
                 </tr>
                 <tr>
-                    <th colspan="6">
+                    <th  colspan="2">Trip No : </th>
+                    <th >Route : RM</th>
+                    <th style="padding: 10px"colspan="2" rowspan="2" >Paid</th>
+                    <td colspan="3" rowspan="2" ></td>
+                </tr>
+                <tr >
+                    <td colspan="2">Vechicle : </td>
+                    <td  colspan="2">Driver Name : </td>
+                </tr>
+                <tr>
+                    <th colspan="5" rowspan=""></th>
+                    <th colspan="3" rowspan="">Customer Sign : </th>
+                </tr>
+                <tr>
+                    <th  style="padding: 25px"colspan="2" rowspan="" >Office Executive : </th>
+                    <th  style="padding: 25px"colspan="2" rowspan="" >Route Map :</th>
+                    <th style="padding: 25px" colspan="1" rowspan="">Cashier : </th>
+                    <th  style="padding: 25px"colspan="4" rowspan="">Material in Charge : </th>
+
+                </tr>
+
+
+                <tr>
+                    <th colspan="7" >
                         Terms and Conditions
                     </th>
                 </tr>

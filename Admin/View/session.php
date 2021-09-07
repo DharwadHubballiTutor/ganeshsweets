@@ -1,5 +1,6 @@
 <?php
-   $user_check = $_SESSION['login_user'];
+session_start();
+
    if(!isset($_SESSION['login_user'])){
       header("location:login.php");
    }

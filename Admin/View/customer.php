@@ -1,4 +1,5 @@
 <?php
+require_once("session.php");
 include('customerNavigation.php');
 require_once("../DB Operations/customerOps.php");
 require_once("../Model/customerModel.php");
@@ -321,7 +322,11 @@ require_once("../Model/enq_cat_mappingmodel.php");
                         <div class="row">
                             <label class="col-md-4 text-right">Mobile<span class="text-danger">*</span></label>
                             <div class="col-md-8">
-                                <input type="text" class="form-control" id="editedcustomerPhone" name="customerPhone">
+                                <input type="text" class="form-control" id="editedcustomerPhone" name="customerPhone" placeholder="Enter your 10 digit Ph No"
+                                maxlength="10"
+                                pattern="^([6-9]{1})([0-9]{9})$"
+                                title="Mobile Number is not in the correct format"
+                                >
                             </div>
                         </div>
                     </div>

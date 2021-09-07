@@ -1,4 +1,4 @@
-<?php session_start();
+<?php 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -68,7 +68,7 @@
                         <span>Customers</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="salesorder.php">
+                    <a class="nav-link" href="SOview.php">
                         <i class="fas fa-users-cog"></i>
                         <span>Sales Orders</span></a>
                 </li>

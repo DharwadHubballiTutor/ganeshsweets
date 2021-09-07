@@ -1,4 +1,5 @@
 <?php
+require_once("session.php");
 include('header.php');
 require_once("../DB Operations/customerOps.php");
 require_once("../DB Operations/paymentOps.php");

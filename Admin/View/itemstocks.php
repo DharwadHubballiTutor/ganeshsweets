@@ -1,4 +1,5 @@
 <?php
+require_once("session.php");
 include('inventoryheader.php');
 require_once("../DB Operations/item_stocksOps.php");
 require_once("../Model/item_stocksmodel.php");

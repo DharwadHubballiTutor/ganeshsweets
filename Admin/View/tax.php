@@ -1,4 +1,5 @@
 <?php
+require_once("session.php");
 include('details.php');
 require_once("../DB Operations/taxOps.php");
 require_once("../Model/taxmodel.php");

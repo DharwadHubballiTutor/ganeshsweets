@@ -1,4 +1,5 @@
 <?php
+require_once("session.php");
 include "salesorderheader.php";
 include('../DB Operations/SOlineItemOps.php');
 include('../DB Operations/salesorderOps.php');
@@ -296,7 +297,7 @@ $id = $_GET['id'];
     </div>
     <div class="modal fade" id=deleteLineItemModal tabindex=-1 role=dialog aria-hidden=true>
         <div class="modal-dialog">
-            <form method="SOST" id="delete_lineItem_form" enctype="multipart/form-data">
+            <form method="POST" id="delete_lineItem_form" enctype="multipart/form-data">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h4 class="modal-title" id="modal_title">Delete Purchase Order Line Item</h4>
@@ -306,7 +307,7 @@ $id = $_GET['id'];
                         <p class="lead">
                             Are you sure. Would you like to delete this Line Item.
                         </p>
-                        <input type="hidden" name="SOlineItemId" id="SOlineItemId" value="">
+                        <input type="hidden" name="SOlineItemId" id="deleteSOlineItemId" value="">
                         <input type="hidden" name="SOID" id="deleteSOID" value="">
                     </div>
                     <div class="modal-footer">
@@ -328,8 +329,9 @@ $id = $_GET['id'];
 
             });
             $('#deleteLineItemModal').on('show.bs.modal', function(e) {
+                debugger;
                 var rowid = $(e.relatedTarget).data('id');
-                $('#SOlineItemId').val(rowid);
+                $('#deleteSOlineItemId').val(rowid);
 
             });
             var uniturl = config.developmentPath +
@@ -442,15 +444,16 @@ $id = $_GET['id'];
             });
 
 
-
-            $('#delete_lineItem_form').submit(function(event) {
+            
+            $('#delete_lineItem_form').submit(function(event)  {
+                debugger;
                 $.ajax({
                     url: config.developmentPath +
                         "/Admin/Controller/SOlineItemController.php/",
-                    method: "SOST",
+                    method: "POST",
                     data: {
-                        id: $('#SOlineItemId').val(),
-                        quoteId: $('#deleteSOID').val(),
+                        id: $('#deleteSOlineItemId').val(),
+                        
                         action: 'delete'
                     },
                 }).done(function(data) {

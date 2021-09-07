@@ -1,4 +1,5 @@
 <?php
+require_once("session.php");
 include('subcategory.php');
 require_once("../DB Operations/item_subcategoryOps.php");
 require_once("../Model/item_subcategorymodel.php");

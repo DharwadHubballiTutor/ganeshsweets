@@ -139,7 +139,7 @@ class DBSOLineItem
             $sales=new salesOrder();
             $sales->set_Id($row["Id"]);
             //$quotation->set_quotationname($row["quotation_name"]);
-            array_push($salesList, $quotation);
+            array_push($salesList, $sales);
           }
         }
         return $salesList;
@@ -164,7 +164,7 @@ class DBSOLineItem
       public static function delete($lineItemObj){
         $db=ConnectDb::getInstance();
         $connectionObj=$db->getConnection();
-        $sql="DELETE from salesorder_lineitem where Id=".$lineItemObj;
+        $sql="DELETE from salesorder_lineitem where SOlineitemId=".$lineItemObj;
         error_log($sql);
         if ($connectionObj->query($sql) === TRUE) {
         } else {

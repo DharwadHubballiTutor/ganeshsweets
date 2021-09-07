@@ -33,7 +33,10 @@ class DBuser
         $userObj->set_userstatus($row['user_status']);
         return $userObj;
         }
-        return 0;
+        else{
+          return NULL;
+        }
+        
       }
 
       public static function getAllUsers(){

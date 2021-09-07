@@ -1,4 +1,4 @@
-<?php session_start();
+<?php 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -100,7 +100,7 @@
                         <i class="fa fa-bars"></i>
                     </button>
                     <i class="fas fa-user"></i>
-                <div class="sidebar-brand-text mx-3"><?php echo $_SESSION['login_user']; ?></div>
+                <div class="sidebar-brand-text mx-3"></div>
                     <!-- Topbar Navbar -->
                     <ul class="navbar-nav ml-auto">
 

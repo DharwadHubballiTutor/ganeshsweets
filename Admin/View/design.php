@@ -1,4 +1,5 @@
 <?php
+require_once("session.php");
 require_once("customerNavigation.php");
 require_once "../DB Operations/designFileOps.php";
 require_once "../Model/designfilesModel.php";

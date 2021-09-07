@@ -1,4 +1,5 @@
 <?php
+require_once("session.php");
 include('customerNavigation.php');
 include('../DB Operations/lineItemOps.php');
 include('../DB Operations/quotationOps.php');

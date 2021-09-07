@@ -1,4 +1,5 @@
 <?php include('inventoryheader.php');
+require_once("session.php");
 require_once("../DB Operations/item_detailsOps.php");
 require_once("../DB Operations/item_categoryOps.php");
 require_once("../DB Operations/item_subcategoryOps.php");

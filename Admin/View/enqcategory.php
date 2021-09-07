@@ -1,4 +1,5 @@
 <?php
+require_once("session.php");
 include('header.php');
 require_once("../DB Operations/enq_categoryOps.php");
 require_once("../Model/enq_categorymodel.php");

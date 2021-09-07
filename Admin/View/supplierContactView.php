@@ -1,4 +1,5 @@
 <?php
+
 include('channelpartnerheader.php');
 require_once "../DB Operations/supplierContactOps.php";
 require_once("../Model/supplierContactModel.php");
